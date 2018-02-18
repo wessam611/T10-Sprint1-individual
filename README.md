@@ -8,8 +8,25 @@
 # Mini project - Sprint 1
 
 ## Getting Started
-> input start up guide for the website here
-  ## Authors
+
+- In order to start the project you have to start a data base connection first
+  open a new terminal (Linux) or command prompt, or git bash (Windows) and run `mongod`
+  then keep this terminal open.
+  
+- go to the Server directory and run
+
+```
+npm install
+npm start
+```
+- go to Client directory and run
+```
+npm install
+ng serve -o
+```
+- A web page will open on port `4200` 
+
+ ## Authors
   - [Reda Ramadan](https://github.com/Logician724) 
   - [Wessam Ali](https://github.com/wessam611) 
   - [Maqarios Mohareb](https://github.com/Maqarios)
