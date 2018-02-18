@@ -13,13 +13,13 @@
   open a new terminal (Linux) or command prompt, or git bash (Windows) and run `mongod`
   then keep this terminal open.
   
-- go to the Server directory and run
+- go to the Server directory and run in a new terminal
 
 ```
 npm install
 npm start
 ```
-- go to Client directory and run
+- go to Client directory and run in a new terminal
 ```
 npm install
 ng serve -o
@@ -52,3 +52,5 @@ ng serve -o
   - [Mariam Mahran](https://github.com/mariamkhmahran)
   - [Ola Elarif](https://github.com/olaelarif)
   - [Salma Ghoneim](https://github.com/SalmaGhoneim)
+
+## About
