@@ -1,5 +1,5 @@
 require('./api/config/DBConnection');
-const express = require('express'),
+var express = require('express'),
   logger = require('morgan'),
   cors = require('cors'),
   helmet = require('helmet'),
@@ -30,17 +30,18 @@ app.use(
 app.use('/api', routes);
 
 // 500 internal server error handler
-app.use((err, req, res, next) => {
+app.use(function(err, req, res, next) {
   if (err.statusCode === 404) return next();
   res.status(500).json({
-    err: err,
+    // Never leak the stack trace of the err if running in production mode
+    err: process.env.NODE_ENV === 'production' ? null : err,
     msg: '500 Internal Server Error',
     data: null
   });
 });
 
 // 404 error handler
-app.use((req, res) => {
+app.use(function(req, res) {
   res.status(404).json({
     err: null,
     msg: '404 Not Found',
