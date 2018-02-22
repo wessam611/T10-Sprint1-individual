@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
+import { CompanyComponent } from './company/company.component';
 
 const routes: Routes = [
   {
@@ -13,8 +14,12 @@ const routes: Routes = [
         loadChildren: './items/items.module#ItemsModule'
       },
       {
+        path: 'company',
+        component: CompanyComponent
+      },
+      {
         path: '',
-        redirectTo: 'items',
+        redirectTo: 'company',
         pathMatch: 'full'
       }
     ]
@@ -26,4 +31,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: []
 })
-export class DashboardRoutingModule {}
+export class DashboardRoutingModule { }
