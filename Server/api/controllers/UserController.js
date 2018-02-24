@@ -35,7 +35,7 @@ var mongoose = require('mongoose'),
   };
 
   module.exports.login = function(req, res, next) {
-    if (!Validations.isString(req.params.emailAddress)) {
+    if (!Validations.isString(req.body.emailAddress)) {
       return res.status(422).json({
         err: null,
         msg: 'Email parameter must be a valid email address.',
@@ -43,7 +43,7 @@ var mongoose = require('mongoose'),
       });
     }
 
-    if (!Validations.isString(req.params.password)) {
+    if (!Validations.isString(req.body.password)) {
         return res.status(422).json({
           err: null,
           msg: 'Password parameter must be a valid password.',
@@ -51,7 +51,7 @@ var mongoose = require('mongoose'),
         });
       }
 //to be added
-    User.findOne({'emailAddress': req.params.emailAddress, 'password': req.params.password})
+    User.findOne({'emailAddress': req.body.emailAddress, 'password': req.body.password})
     .exec(function(err, user) {
       if (err) {
         return next(err);
