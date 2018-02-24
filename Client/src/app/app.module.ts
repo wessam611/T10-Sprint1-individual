@@ -8,9 +8,11 @@ import { ThemeModule } from './@theme/theme.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { CartComponent } from './cart/cart.component';
+import { CartServiceService } from './cart-service.service';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, CartComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -19,6 +21,6 @@ import { AppComponent } from './app.component';
     AppRoutingModule
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
+  providers: [{ provide: APP_BASE_HREF, useValue: '/', providers: [CartServiceService] }]
 })
 export class AppModule {}
