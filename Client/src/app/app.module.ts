@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
+import {NbEmailPassAuthProvider, NbAuthModule} from '@nebular/auth';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -16,7 +18,17 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    NbAuthModule.forRoot({
+      providers: {
+        email: {
+          service: NbEmailPassAuthProvider,
+          config: {
+          },
+        },
+      },
+      forms: {},
+    })
   ],
   bootstrap: [AppComponent],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
