@@ -24,6 +24,7 @@ import {NbEmailPassAuthProvider, NbAuthModule} from '@nebular/auth';
         email: {
           service: NbEmailPassAuthProvider,
           config: {
+            baseEndpoint: 'http://localhost:3000/'
           },
         },
       },
