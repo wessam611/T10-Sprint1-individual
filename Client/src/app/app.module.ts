@@ -30,7 +30,23 @@ import {NbEmailPassAuthProvider, NbAuthModule, NbAuthService} from './auth';
           },
         },
       },
-      forms: {},
+      forms:  {
+        login: {
+          redirectDelay: 0,
+        },
+        register: {
+          redirectDelay: 0,
+        },
+        requestPassword: {
+          redirectDelay: 0,
+        },
+        resetPassword: {
+          redirectDelay: 0,
+        },
+        logout: {
+          redirectDelay: 0,
+        },
+      },
     })
   ],
   bootstrap: [AppComponent],
