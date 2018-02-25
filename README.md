@@ -1,6 +1,6 @@
 
 <p align="center">
-<img src="http://i68.tinypic.com/2ywu612.png" alt="parasite" />
+<img src="http://i63.tinypic.com/rububs.jpg" alt="parasite" />
 <br />
 <br />
 </p>
