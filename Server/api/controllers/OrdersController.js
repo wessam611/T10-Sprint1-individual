@@ -1,0 +1,110 @@
+var mongoose = require('mongoose'),
+var auth = require('basic-auth'),
+    Validation = require('../utils/Validations'),
+    User = mongoose.model('User'),
+    Product = mongoose.model('Product');
+
+
+
+module.exports.getOrders = function (req, res, next) {
+    /* 
+    * End point for retrieving user's orders 
+    * 
+    * @author: Wessam Ali
+    */
+    var userId = req.params.userId;
+
+    // Validating the userId
+    var user = User.findOne({
+        id: userId
+    }).exec(function (err, user) {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return res
+                .status(403)
+                .json({
+                    err: 'Wrong user id',
+                    msg: null,
+                    body: null
+                });
+        }
+        var orders = user.orders;
+        return res
+            .status(200)
+            .json({
+                err: null,
+                msg: 'Orders',
+                data: orders
+            });
+    });
+};
+
+module.exports.postOrders = function (req, res, next) {
+    /* 
+    * End point for creating a new order(checkout) 
+    * 
+    * @author: Wessam Ali
+    */
+    var userId = req.params.userId;
+
+    // Validating the userId
+    var user = User.findOne({
+        id: userId
+    }).exec(function (err, user) {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return res
+                .status(403)
+                .json({
+                    err: 'Wrong user id',
+                    msg: null,
+                    body: null
+                });
+        }
+
+        // Validating cart
+        var cart = req.body.cart;
+        if (!(cart && cart.orderItems && cart.price)) {
+            return res
+                .status(404)
+                .json({
+                    err: 'Cart isn\'t valid',
+                    msg: null,
+                    body: null
+                });
+        }
+        // Validating shippingAddress
+        var shippingAddress = req.body.shippingAddress;
+        if(!shippingAddress){
+            return res
+                .status(404)
+                .json({
+                    err: 'Shipping address isn\'t provided',
+                    msg: null,
+                    body: null
+                });
+        }
+        var order = user.orders.create({
+            orderItems: cart.orderItems,
+            price: cart.price,
+            shippingAddress: req.body.shippingAddress
+        });
+        user.save(function(err){
+            if(err){
+                return next(err);
+            }
+            return res
+                .status(201)
+                .json({
+                    err: null,
+                    msg: 'Orders',
+                    data: order
+                });
+        });
+        
+    });
+};

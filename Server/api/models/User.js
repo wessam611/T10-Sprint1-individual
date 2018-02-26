@@ -25,5 +25,12 @@ var userSchema = mongoose.Schema({
         default: 'viewer'
     }
   });
+
+  userSchema.statics.getUser = function(emailAddress, password) {
+      return this.find({
+          emailAddress: emailAddress,
+          password: password
+    });
+  }
   
   mongoose.model('User', userSchema);

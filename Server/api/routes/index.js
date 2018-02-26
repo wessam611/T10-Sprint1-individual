@@ -1,7 +1,8 @@
 var express = require('express'),
   router = express.Router(),
   productCtrl = require('../controllers/ProductController'),
-  userCtrl = require('../controllers/UserController');
+  userCtrl = require('../controllers/UserController'),
+  orderCtrl = require('../controllers/OrdersController');
 
 //-------------------------------Product Routes-----------------------------------
 router.get('/product/getProducts', productCtrl.getProducts);
@@ -17,4 +18,9 @@ router.delete('/product/deleteProduct/:productId', productCtrl.deleteProduct);
 //added quickly
 router.post('/user/login',userCtrl.login);
 router.post('/user/signup',userCtrl.signUp);
+
+// Orders endpoints
+router.get('/user/:userId(\d+)/orders', orderCtrl.getOrders);
+router.post('/user/:userId(\d+)/orders', orderCtrl.postOrders);
+
 module.exports = router;
