@@ -1,0 +1,17 @@
+
+<ul *ngFor= "let orderOne of orders">
+<div class="Ordercard">
+  <div>
+  <h5> <b>Shipping address:</b> {{orderOne.address}}</h5>
+  <h5> <b>Shipping time:</b> {{orderOne.time}}</h5>
+  <h5> <b>Total Cost:</b> {{orderOne.totalPrice | currency}}</h5>
+</div>
+  <h5><b>Products:</b></h5>
+  <ul *ngFor="let product of orderOne.products">
+    <div class="Productcard">
+        <h5><b>Item: {{product.name}}</b></h5>
+        <p>Price: {{product.price | currency}}</p>
+    </div>
+  </ul>
+</div>
+</ul>

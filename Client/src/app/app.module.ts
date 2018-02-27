@@ -9,12 +9,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { CartComponent } from './cart/cart.component';
-
 import {NbEmailPassAuthProvider, NbAuthModule, NbAuthService} from '@nebular/auth';
+import { OrderService } from './orders/order.service';
 
 @NgModule({
-  declarations: [AppComponent, CartComponent],
+  declarations: [AppComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -23,7 +22,7 @@ import {NbEmailPassAuthProvider, NbAuthModule, NbAuthService} from '@nebular/aut
     ThemeModule.forRoot(),
     AppRoutingModule,
     NbAuthModule.forRoot({
-      providers: {
+  providers: {
         email: {
           service: NbEmailPassAuthProvider,
           config: {
@@ -51,6 +50,6 @@ import {NbEmailPassAuthProvider, NbAuthModule, NbAuthService} from '@nebular/aut
     })
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, NbAuthService]
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, NbAuthService, OrderService]
 })
 export class AppModule {}
