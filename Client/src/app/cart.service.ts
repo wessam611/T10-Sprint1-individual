@@ -23,44 +23,47 @@ export class CartService {
   }
 
   // Update Cart
-  updateCart(cart: Cart): Observable<any> {
-    return this.http.put(this.cartUrl, cart, /* Http Options */)
+  updateCart(tempCart: Cart): Observable<any> {
+    return this.http.put(this.cartUrl, tempCart, /* Http Options */)
   }
 
   // Add Cart If No Cart Is On The Server
-  addCart(cart: Cart): Observable<any> {
-    return this.http.post(this.cartUrl, cart, /* Http Options */)
+  addCart(tempCart: Cart): Observable<any> {
+    return this.http.post(this.cartUrl, tempCart, /* Http Options */)
   }
 
   // Add Product To The Cart
-  addProduct(cart: Cart, tempProduct: Product): void {
-    if (!this.exists(cart, tempProduct)) {
-      cart.products.push(tempProduct);
-      cart.totalPrice += tempProduct.price;
+  addProduct(tempCart: Cart, tempProduct: Product): void {
+    if (!this.exists(tempCart, tempProduct)) {
+      tempCart.products.push(tempProduct);
+      tempCart.totalPrice += tempProduct.price;
+      this.setCartToLocalStorage(tempCart);
     }
   }
 
   // Remove Product From The Cart
-  removeProduct(cart: Cart, tempProduct: Product): void {
+  removeProduct(tempCart: Cart, tempProduct: Product): void {
     var tempProducts: Product[] = [];
-    for (let tempProduct2 of cart.products) {
+    for (let tempProduct2 of tempCart.products) {
       if (tempProduct.id != tempProduct2.id) {
         tempProducts.push(tempProduct2);
       }
     }
-    cart.products = tempProducts;
-    cart.totalPrice -= tempProduct.price;
+    tempCart.products = tempProducts;
+    tempCart.totalPrice -= tempProduct.price;
+    this.setCartToLocalStorage(tempCart);
   }
 
   // Clear Cart
-  clearCart(cart: Cart): void {
-    cart.products = [];
-    cart.totalPrice = 0;
+  clearCart(tempCart: Cart): void {
+    tempCart.products = [];
+    tempCart.totalPrice = 0;
+    this.clearLocalStorage();
   }
 
   // Check If Product Is In The Cart
-  exists(cart: Cart, tempProduct: Product): boolean {
-    for (let tempProduct2 of cart.products) {
+  exists(tempCart: Cart, tempProduct: Product): boolean {
+    for (let tempProduct2 of tempCart.products) {
       if (tempProduct.id == tempProduct2.id) {
         return true;
       }
@@ -74,8 +77,13 @@ export class CartService {
   }
 
   // Save Cart To Local Storage
-  setCartToLocalStorage(cart: Cart): void {
-    localStorage.setItem("cart_t10_sprint1", JSON.stringify(cart));
+  setCartToLocalStorage(tempCart: Cart): void {
+    localStorage.setItem("cart_t10_sprint1", JSON.stringify(tempCart));
+  }
+
+  // Clear Local Storage
+  clearLocalStorage(): void {
+    localStorage.clear();
   }
 
 }
