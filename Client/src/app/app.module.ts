@@ -9,12 +9,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { CartComponent } from './cart/cart.component';
 
 import {NbEmailPassAuthProvider, NbAuthModule, NbAuthService} from '@nebular/auth';
 
 @NgModule({
-  declarations: [AppComponent, CartComponent],
+  declarations: [AppComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
