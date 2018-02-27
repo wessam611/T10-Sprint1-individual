@@ -68,4 +68,14 @@ export class CartService {
     return false;
   }
 
+  // Get Cart From Local Storage
+  getCartFromLocalStorage(): Cart {
+    return JSON.parse(localStorage.getItem("cart_t10_sprint1"));
+  }
+
+  // Save Cart To Local Storage
+  setCartToLocalStorage(cart: Cart): void {
+    localStorage.setItem("cart_t10_sprint1", JSON.stringify(cart));
+  }
+
 }
