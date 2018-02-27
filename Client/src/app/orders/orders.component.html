@@ -2,8 +2,8 @@
 <ul *ngFor= "let orderOne of orders">
 <div class="Ordercard">
   <div>
-  <h5> <b>Shipping address:</b> {{orderOne.address}}</h5>
-  <h5> <b>Shipping time:</b> {{orderOne.time}}</h5>
+  <h5> <b>Shipping address:</b> {{orderOne.shippingAddress}}</h5>
+  <h5> <b>Purchase Date:</b> {{orderOne.purchaseDate | date}}</h5>
   <h5> <b>Total Cost:</b> {{orderOne.totalPrice | currency}}</h5>
 </div>
   <h5><b>Products:</b></h5>
