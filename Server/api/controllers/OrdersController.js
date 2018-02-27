@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-var auth = require('basic-auth'),
+    auth = require('basic-auth'),
     Validation = require('../utils/Validations'),
     User = mongoose.model('User'),
     Product = mongoose.model('Product');
