@@ -60,26 +60,26 @@ module.exports.postOrders = function (req, res, next) {
             return res
                 .status(403)
                 .json({
-                    err: 'Wrong user id',
+                    err: 'Wrong user id.',
                     msg: null,
                     body: null
                 });
         }
 
         // Validating cart
-        var cart = req.body.cart;
-        if (!(cart && cart.orderItems && cart.price)) {
+        var cart = user.cart;
+        if (length(cart) == 0) {
             return res
                 .status(404)
                 .json({
-                    err: 'Cart isn\'t valid',
+                    err: 'Cart is empty',
                     msg: null,
                     body: null
                 });
         }
         // Validating shippingAddress
         var shippingAddress = req.body.shippingAddress;
-        if(!shippingAddress){
+        if (!shippingAddress) {
             return res
                 .status(404)
                 .json({
@@ -89,12 +89,12 @@ module.exports.postOrders = function (req, res, next) {
                 });
         }
         var order = user.orders.create({
-            orderItems: cart.orderItems,
-            price: cart.price,
+            products: cart.products,
+            totalPrice: cart.totalPrice,
             shippingAddress: req.body.shippingAddress
         });
-        user.save(function(err){
-            if(err){
+        user.save(function (err) {
+            if (err) {
                 return next(err);
             }
             return res
@@ -105,6 +105,6 @@ module.exports.postOrders = function (req, res, next) {
                     data: order
                 });
         });
-        
+
     });
 };
