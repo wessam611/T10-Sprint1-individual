@@ -48,17 +48,8 @@ var userSchema = mongoose.Schema({
         required: true,
         trim: true
     },
-    cart: {
-        type: cartSchema,
-        default: {
-            products: [],
-            totalPrice: 0
-        }
-    },
-    orders: {
-        type: [orderSchema],
-        default: []
-    },
+    cart: cartSchema,
+    orders: [orderSchema],
     userType: {
         type: String,
         default: 'viewer'
