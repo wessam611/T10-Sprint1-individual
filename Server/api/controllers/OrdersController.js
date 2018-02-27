@@ -16,7 +16,7 @@ module.exports.getOrders = function (req, res, next) {
 
     // Validating the userId
     var user = User.findOne({
-        id: userId
+        _id: userId
     }).exec(function (err, user) {
         if (err) {
             return next(err);
@@ -51,7 +51,7 @@ module.exports.postOrders = function (req, res, next) {
 
     // Validating the userId
     var user = User.findOne({
-        id: userId
+        _id: userId
     }).exec(function (err, user) {
         if (err) {
             return next(err);
