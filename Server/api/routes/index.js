@@ -20,7 +20,7 @@ router.post('/user/login',userCtrl.login);
 router.post('/user/signup',userCtrl.signUp);
 
 // Orders endpoints
-router.get('/user/:userId(\d+)/orders', orderCtrl.getOrders);
-router.post('/user/:userId(\d+)/orders', orderCtrl.postOrders);
+router.get('/user/:userId/orders', orderCtrl.getOrders);
+router.post('/user/:userId/orders', orderCtrl.postOrders);
 
 module.exports = router;
