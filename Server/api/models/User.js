@@ -1,10 +1,12 @@
 var mongoose = require('mongoose'),
-    Product = mongoose.model('Product')
-
-var productSchema = Product.schema;
+    Product = mongoose.model('Product'),
+    productSchema = Product.schema;
 
 var cartSchema = mongoose.Schema({
-    products: [productSchema],
+    products: {
+        type: [productSchema],
+        required: true
+    },
     totalPrice: {
         type: Number,
         required: true
@@ -12,7 +14,10 @@ var cartSchema = mongoose.Schema({
 });
 
 var orderSchema = mongoose.Schema({
-    products: [productSchema],
+    products: {
+        type: [productSchema],
+        required: true
+    },
     totalPrice: {
         type: Number,
         required: true
