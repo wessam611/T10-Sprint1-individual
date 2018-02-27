@@ -3,15 +3,33 @@ import { Cart, Product } from './difinitions'
 import { PRODUCTS } from './mock-products'; // To Be Removed
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable()
 export class CartService {
 
-  constructor() { }
+  private cartUrl = ''; //To Be Modified
+  private httpOptions = {
+    headers: new HttpHeaders({})
+  };
+
+  constructor(private http: HttpClient) { }
 
   // Return Cart
   getCart(): Observable<Cart> {
-    return of({products: PRODUCTS, totalPrice: 21});
+    this.http.get<Cart>(this.cartUrl); // To Be Returned
+    return of({products: [], totalPrice: 0}); // To Be Removed
+  }
+
+  // Update Cart
+  updateCart(cart: Cart): Observable<any> {
+    return this.http.put(this.cartUrl, cart, /* Http Options */)
+  }
+
+  // Add Cart If No Cart Is On The Server
+  addCart(cart: Cart): Observable<any> {
+    return this.http.post(this.cartUrl, cart, /* Http Options */)
   }
 
   // Add Product To The Cart
