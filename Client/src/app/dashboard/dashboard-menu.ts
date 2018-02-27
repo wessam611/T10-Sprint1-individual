@@ -5,7 +5,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   ,
   {
     title: 'Store',
-    icon: 'ng-menu',
+    icon: 'fa fa-shopping-basket',
     link: '/dashboard/store'
   },
   {
@@ -16,7 +16,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   ,
   {
     title: 'Orders',
-    icon: 'icon ion-cube',
+    icon: 'fa fa-shopping-basket',
     link: '/dashboard/orders'
   }
 
