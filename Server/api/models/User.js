@@ -56,4 +56,6 @@ var userSchema = mongoose.Schema({
     }
 });
 
+
+
 mongoose.model('User', userSchema);

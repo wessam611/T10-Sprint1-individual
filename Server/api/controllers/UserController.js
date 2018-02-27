@@ -48,7 +48,7 @@ module.exports.login = function (req, res, next) {
         err: null,
         msg: 'Password parameter must be a valid password.',
         data: null
-      });
+      });01
     }
   //to be added
   User.findOne({
