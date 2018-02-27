@@ -1,6 +1,37 @@
 var mongoose = require('mongoose'),
     Product = mongoose.model('Product');
 
+var cartSchema = mongoose.Schema({
+    products: {
+        type: [Product.Schema],
+        required: true
+    },
+    totalPrice: {
+        type: Number,
+        required: true
+    }
+});
+
+var orderSchema = mongoose.Schema({
+    products: {
+        type: [Product.Schema],
+        required: true
+    },
+    totalPrice: {
+        type: Number,
+        required: true
+    },
+    purchaseDate: {
+        type: Date,
+        default: Date.now
+    },
+    shippingAddress: {
+        type: String,
+        trim: true,
+        required: true
+    }
+});
+
 var userSchema = mongoose.Schema({
     fullName: {
         type: String,
@@ -17,7 +48,13 @@ var userSchema = mongoose.Schema({
         required: true,
         trim: true
     },
-    cart: cartSchema,
+    cart: {
+        type: cartSchema,
+        default: {
+            products: [],
+            totalPrice: 0
+        }
+    },
     orders: {
         type: [orderSchema],
         default: []
@@ -25,37 +62,6 @@ var userSchema = mongoose.Schema({
     userType: {
         type: String,
         default: 'viewer'
-    }
-});
-
-var cartSchema = mongoose.Schema({
-    products: { 
-        type: [Product.Schema],
-        required: true
-    },
-    totalPrice: { 
-        type: Number,
-        required: true
-    }
-});
-
-var orderSchema = mongoose.Schema({
-    products: {
-        type: [Product.Schema],
-        required: true
-    },
-    totalPrice: { 
-        type: Number,
-        required: true
-    },
-    purchaseDate: {
-        type: Date,
-        default: Date.now
-    },
-    shippingAddress: {
-        type: String,
-        trim: true,
-        required: true
     }
 });
 
