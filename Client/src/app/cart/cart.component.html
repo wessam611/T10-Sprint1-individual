@@ -1,3 +1,18 @@
-<p>
-  cart works!
-</p>
+<div *ngIf="this.cart.products.length > -1" >
+  <table id="tableCartProducts">
+    <tr>
+      <th id="thCartProductsName">Name</th>
+      <th id="thCartProductsPrice">Price</th>
+      <th id="thCartProductsSellerName">Seller Name</th>
+      <th style="width: 1.5vw" (click)="this.cartService.clearCart(this.cart)"></th>
+    </tr>
+    <tr *ngFor="let product of cart.products">
+      <td>{{ product.name | uppercase }}</td>
+      <td>{{ product.price | currency }}</td>
+      <td>{{ product.sellerName }}</td>
+      <td (click)="this.cartService.removeProduct(this.cart, product)"></td>
+    </tr>
+  </table>
+  <br />
+  <input id="inputTotalPrice" type="button" value="Total Price: {{ this.cart.totalPrice | currency }}" title="Check Out">
+</div>
