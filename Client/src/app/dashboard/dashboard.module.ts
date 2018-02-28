@@ -9,10 +9,10 @@ import { CartComponent } from '../cart/cart.component';
 import { CartService } from '../cart.service';
 import { StoreComponent } from '../store/store.component';
 import { StoreService } from '../store.service'
-
+import { OrdersComponent } from '../orders/orders.component';
 @NgModule({
   imports: [ThemeModule, DashboardRoutingModule],
-  declarations: [DashboardComponent,CompanyComponent, CartComponent, StoreComponent],
+  declarations: [DashboardComponent,CompanyComponent, StoreComponent,OrdersComponent, CartComponent],
   entryComponents: [],
   providers: [CartService, StoreService]
 })
