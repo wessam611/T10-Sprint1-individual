@@ -31,10 +31,6 @@ const routes: Routes = [
         path: '',
         redirectTo: 'company',
         pathMatch: 'full'
-      },
-      {
-        path: 'cart',
-        component: CartComponent
       }
     ]
   }

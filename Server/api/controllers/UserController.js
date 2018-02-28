@@ -18,19 +18,29 @@ module.exports.signUp = function (req, res, next) {
       data: null
     });
   }
-  // Security Check
-  delete req.body.createdAt;
-  delete req.body.updatedAt;
 
-  User.create(req.body, function (err, user) {
+  User.findOne({ emailAddress: req.body.emailAddress }).exec(function (err, user) {
     if (err) {
       return next(err);
     }
-    res.status(201).json({
-      err: null,
-      msg: 'User was created successfully.',
-      data: user
-    });
+    if (user) {
+      return res.status(422).json({
+        err: null,
+        msg: 'The email you signed up with alreay exists. You should login',
+        data: null
+      });
+    } else {
+      User.create(req.body, function (err, user) {
+        if (err) {
+          return next(err);
+        }
+        res.status(201).json({
+          err: null,
+          msg: 'User was created successfully.',
+          data: user
+        });
+      });
+    }
   });
 };
 
@@ -48,9 +58,9 @@ module.exports.login = function (req, res, next) {
         err: null,
         msg: 'Password parameter must be a valid password.',
         data: null
-      });01
+      });
     }
-  //to be added
+
   User.findOne({
     emailAddress: req.body.emailAddress,
     password: req.body.password
