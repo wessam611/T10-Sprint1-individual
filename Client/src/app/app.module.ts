@@ -7,13 +7,11 @@ import { ThemeModule } from './@theme/theme.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserService } from './user.service';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
 import { FormsModule }   from '@angular/forms';
+import { UserService } from './user.service';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, LoginComponent],
+  declarations: [AppComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -24,6 +22,6 @@ import { FormsModule }   from '@angular/forms';
     AppRoutingModule,
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, UserService]
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' },UserService]
 })
 export class AppModule {}
