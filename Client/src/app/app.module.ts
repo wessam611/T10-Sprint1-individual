@@ -7,14 +7,20 @@ import { ThemeModule } from './@theme/theme.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import {NbEmailPassAuthProvider, NbAuthModule, NbAuthService} from '@nebular/auth';
 import { OrderService } from './orders/order.service';
+import { UserService } from './user.service';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, RegisterComponent, LoginComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
+    FormsModule,
     BrowserAnimationsModule,
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
@@ -48,6 +54,6 @@ import { OrderService } from './orders/order.service';
     })
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, NbAuthService, OrderService]
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, NbAuthService, OrderService. UserService]
 })
 export class AppModule {}
