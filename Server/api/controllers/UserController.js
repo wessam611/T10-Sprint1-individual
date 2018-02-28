@@ -54,12 +54,12 @@ module.exports.login = function (req, res, next) {
   }
 
   if (!Validations.isString(req.body.password)) {
-    return res.status(422).json({
-      err: null,
-      msg: 'Password parameter must be a valid password.',
-      data: null
-    });
-  }
+      return res.status(422).json({
+        err: null,
+        msg: 'Password parameter must be a valid password.',
+        data: null
+      });
+    }
 
   User.findOne({
     emailAddress: req.body.emailAddress,

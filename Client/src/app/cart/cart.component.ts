@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Cart, Product } from '../difinitions';
 import { CartService } from '../cart.service';
 
@@ -8,7 +9,6 @@ import { CartService } from '../cart.service';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-
   cart: Cart;
 
   constructor(private cartService: CartService) { }
