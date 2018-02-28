@@ -46,10 +46,10 @@ export class HeaderComponent implements OnInit {
       this.ngOnInit();
     }
     else if(event.title === 'Sign up'){
-      this.router.navigate(['auth/register']);
+      this.router.navigate(['/dashboard/auth/register']);
     }
     else if(event.title === 'Login'){
-      this.router.navigate(['auth/login']);
+      this.router.navigate(['/dashboard/auth/login']);
     }
   }
 }

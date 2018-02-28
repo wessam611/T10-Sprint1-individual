@@ -15,6 +15,10 @@ const routes: Routes = [
         loadChildren: './items/items.module#ItemsModule'
       },
       {
+        path: 'auth',
+        loadChildren: './auth/auth.module#AuthModule'
+      },
+      {
         path: 'company',
         component: CompanyComponent
       },
@@ -27,6 +31,7 @@ const routes: Routes = [
         path: 'cart',
         component: CartComponent
       }
+      
     ]
   }
 ];
