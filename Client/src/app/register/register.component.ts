@@ -27,19 +27,17 @@ export class RegisterComponent implements OnInit {
         orders: [],
         userType : this.formInput.type
       };
-      console.log(user);
+
       var self = this;
       
       
       this.userService.register(user).subscribe(function (res) {
-        if (res.msg === 'User was created successfully.') {
           self.userService.updateUser(user);
           self.router.navigate(['/']);
-        }
-        else {
-          alert(res.msg);
-        }
-      });
+      },
+    function(error){
+      alert("The email you entered was already used. Please login instead.");
+    });
     }
   }
 
