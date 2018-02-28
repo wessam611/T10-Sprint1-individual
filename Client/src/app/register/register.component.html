@@ -14,7 +14,7 @@
 
     <div class="form-group">
       <label for="email">Email Address</label>
-      <input type="email" class="form-control" ng-model="text" id="email" [(ngModel)]="formInput.emailAddress" name="email" #email="ngModel" required>
+      <input type="email" class="form-control" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" ng-model="text" id="email" [(ngModel)]="formInput.emailAddress" name="email" #email="ngModel" required>
       <div [hidden]="email.valid || email.untouched" class="alert alert-danger">
         Email is required!
       </div>
@@ -40,14 +40,14 @@
       <label for="type">User Type</label>
       <select class="form-control" id="type"
                 required
-                [(ngModel)]="formInput.userType" name="type"
+                [(ngModel)]="formInput.type" name="type"
                 #type="ngModel" >
-          <option [value]="default" selected="selected">Pick a type..</option>
-          <option [value]="viewer">Viewer</option>
-          <option [value]="admin">Admin</option>
-          <option [value]="manager">Manager</option>
+          <option value="default" selected="selected">Pick a type..</option>
+          <option value="viewer">Viewer</option>
+          <option value="admin">Admin</option>
+          <option value="manager">Manager</option>
         </select>
-        <div [hidden]="type.valid || type.untouched" class="alert alert-danger">
+        <div [hidden]="type.untouched" class="alert alert-danger">
           Please choose a type!
         </div>
     </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { PatternValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -13,18 +14,20 @@ export class RegisterComponent implements OnInit {
   constructor(private userService: UserService,
               private router: Router) { }
 
-  formInput = <any>{};
-
+  formInput = <any>{}; 
+  
   createUser() {
     if (this.formInput.password !== this.formInput.confPass)
       alert('Password is not written correctly.');
+    else if(this.formInput.userType === undefined)
+      alert('Please select a user type!');
     else {
       var user = {
         fullName: this.formInput.fullname,
         emailAddress: this.formInput.emailAddress,
         password: this.formInput.password,
         orders: [],
-        userType : this.formInput.userType
+        userType : this.formInput.type
       };
       var self = this;
       
