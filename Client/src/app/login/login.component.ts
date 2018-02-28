@@ -32,6 +32,9 @@ export class LoginComponent implements OnInit {
       else {
         alert(res.msg);
       }
+    },
+    function(error){
+      alert("Wrong password or email. Or User doesn't exist.");
     });
   }
 
