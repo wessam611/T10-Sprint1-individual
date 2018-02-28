@@ -1,4 +1,4 @@
-<div *ngIf="this.cart.products.length > -1" >
+<div *ngIf="this.cart && this.cart.products.length > 0" >
   <table id="tableCartProducts">
     <tr>
       <th id="thCartProductsName">Name</th>

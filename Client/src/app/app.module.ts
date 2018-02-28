@@ -11,6 +11,7 @@ import { UserService } from './user.service';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule }   from '@angular/forms';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
   declarations: [AppComponent, RegisterComponent, LoginComponent],
@@ -22,6 +23,7 @@ import { FormsModule }   from '@angular/forms';
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     AppRoutingModule,
+    Ng2SmartTableModule
   ],
   bootstrap: [AppComponent],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' }, UserService]

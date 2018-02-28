@@ -1,3 +1,7 @@
-<p>
-  store works!
-</p>
+<ng2-smart-table 
+  [settings]="settings" 
+  [source]="products" 
+  (editConfirm)="onSaveConfirm($event)" 
+  (createConfirm)="onCreateConfirm($event)"
+  (deleteConfirm)="onDeleteConfirm($event) ">
+</ng2-smart-table>
