@@ -13,6 +13,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     link: '/dashboard/items'
   },
   {
+    title: 'Store',
+    icon: 'fa fa-shopping-basket',
+    link: '/dashboard/store'
+  },
+  {
     title: 'Cart',
     icon: 'fa fa-shopping-cart',
     link: '/dashboard/cart'

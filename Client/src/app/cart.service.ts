@@ -17,7 +17,7 @@ export class CartService {
   constructor(private http: HttpClient) { }
 
   // Return Cart
-  getCart(): Observable<Cart> {
+  getCart(id: number): Observable<Cart> {
     this.http.get<Cart>(this.cartUrl); // To Be Returned
     return of({products: [], totalPrice: 0}); // To Be Removed
   }
@@ -73,7 +73,8 @@ export class CartService {
 
   // Get Cart From Local Storage
   getCartFromLocalStorage(): Cart {
-    return JSON.parse(localStorage.getItem("cart_t10_sprint1"));
+    let tempCart = JSON.parse(localStorage.getItem("cart_t10_sprint1"));
+    return (tempCart != null)?tempCart:{products: [], totalPrice: 0};
   }
 
   // Save Cart To Local Storage
