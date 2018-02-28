@@ -7,9 +7,9 @@ var mongoose = require('mongoose'),
 
 
 module.exports.getOrders = function (req, res, next) {
-    /* 
-    * End point for retrieving user's orders 
-    * 
+    /*
+    * End point for retrieving user's orders
+    *
     * @author: Wessam Ali
     */
     var userId = req.params.userId;
@@ -42,9 +42,9 @@ module.exports.getOrders = function (req, res, next) {
 };
 
 module.exports.postOrders = function (req, res, next) {
-    /* 
-    * End point for creating a new order(checkout) 
-    * 
+    /*
+    * End point for creating a new order(checkout)
+    *
     * @author: Wessam Ali
     */
     var userId = req.params.userId;

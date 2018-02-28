@@ -1,32 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { orders } from './mock-orders';
 import {Order} from './Order';
 import {Product} from '../Product';
-import {products} from '../mock-products';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HeaderComponent } from '../@theme/components/header/header.component';
 import { catchError, map, tap } from 'rxjs/operators';
+import {UserService} from '../user.service';
 @Injectable()
 export class OrderService {
-  private ordersUrl = '/user/1/orders'; //TODO
-getOrders (): Observable<Order[]> {
-  return this.http.get<Order[]>(this.ordersUrl)
-      .pipe(
-        catchError(this.handleError('getOrders', []))
-      );
-}
-constructor(
-private http: HttpClient) { }
-private handleError<T> (operation = 'operation', result?: T) {
-  return (error: any): Observable<T> => {
+  getOrders (): Observable<Order[]> {
+  var userid = this.userService.getUser()._id;
+  var ordersUrl = 'http://localhost:3000/api/user/'.concat(userid).concat('/orders');
 
-    // TODO: send the error to remote logging infrastructure
-    console.error(error); // log to console instead
-    // TODO: better job of transforming error for user consumption
-  //  this.log(`${operation} failed: ${error.message}`);
 
+  console.log(ordersUrl);
+
+  return this.http.get<Order[]>(ordersUrl).pipe(catchError(this.handleError('getOrders', []))); }
+
+  constructor(private http: HttpClient,private userService: UserService) { }
+
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+    console.error(error);
+      alert(`${operation} failed: ${error.message}`);
     return of(result as T);
   };
 }

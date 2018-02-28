@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Order} from './Order';
 import {OrderService} from './order.service';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 import {Product} from '../Product';
+import {UserService} from '../user.service';
+
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -13,14 +14,17 @@ import {Product} from '../Product';
 
 export class OrdersComponent implements OnInit {
   orders: Order[];
-  constructor(private orderService:OrderService,private route: ActivatedRoute,private location: Location) { }
+  constructor(private orderService:OrderService, private userService:UserService,private router: Router) { }
   getOrders(): void {
-    // const id = +this.route.snapshot.paramMap.get('userid');
-  this.orderService.getOrders().subscribe(orders => this.orders = orders);
-
+  this.orderService.getOrders().subscribe(res => this.orders = res['orders']);
 }
+
   ngOnInit() {
+    if(this.userService.getUser()===null){
+      this.router.navigate(['auth/login']);
+    }
+    else{
     this.getOrders();
-    console.log(this.orders.length);
+  }
   }
 }

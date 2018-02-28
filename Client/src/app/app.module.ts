@@ -54,6 +54,6 @@ import { FormsModule }   from '@angular/forms';
     })
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, NbAuthService, OrderService. UserService]
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, NbAuthService, OrderService, UserService]
 })
 export class AppModule {}
