@@ -21,10 +21,14 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if(this.service.getUser() !== null)
+    if(this.service.getUser() !== null){
+      this.user = this.service.getUser();
       this.userMenu = [{title:'Logout'}];
-    else
+    }
+    else{
+      this.user = null;
       this.userMenu = [{title:'Sign up'},{title:'Login'}];
+    }
   }
 
   toggleSidebar(): boolean {
