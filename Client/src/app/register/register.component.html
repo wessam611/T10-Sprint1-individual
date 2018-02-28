@@ -42,12 +42,11 @@
                 required
                 [(ngModel)]="formInput.type" name="type"
                 #type="ngModel" >
-          <option value="default" selected="selected">Pick a type..</option>
           <option value="viewer">Viewer</option>
           <option value="admin">Admin</option>
           <option value="manager">Manager</option>
         </select>
-        <div [hidden]="type.untouched" class="alert alert-danger">
+        <div [hidden]="type.valid || type.untouched" class="alert alert-danger">
           Please choose a type!
         </div>
     </div>

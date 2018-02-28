@@ -19,8 +19,6 @@ export class RegisterComponent implements OnInit {
   createUser() {
     if (this.formInput.password !== this.formInput.confPass)
       alert('Password is not written correctly.');
-    else if(this.formInput.userType === undefined)
-      alert('Please select a user type!');
     else {
       var user = {
         fullName: this.formInput.fullname,
@@ -29,6 +27,7 @@ export class RegisterComponent implements OnInit {
         orders: [],
         userType : this.formInput.type
       };
+      console.log(user);
       var self = this;
       
       
