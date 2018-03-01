@@ -5,39 +5,47 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
+import { UserService } from './user.service';
+
 
 @Injectable()
 export class CartService {
 
-  private cartUrl = ''; //To Be Modified
-  private httpOptions = {
-    headers: new HttpHeaders({})
-  };
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private userService: UserService) { }
 
   // Return Cart
-  getCart(id: number): Observable<Cart> {
-    this.http.get<Cart>(this.cartUrl); // To Be Returned
-    return of({products: [], totalPrice: 0}); // To Be Removed
+  getCart(): any {
+    var user = this.userService.getUser();
+    if (user)
+      return this.http.get<any>('http://localhost:3000/api/user/' + user._id + '/cart');
+    else
+      return this.getCartFromLocalStorage();
+
   }
 
   // Update Cart
   updateCart(tempCart: Cart): Observable<any> {
-    return this.http.put(this.cartUrl, tempCart, /* Http Options */)
+    var user = this.userService.getUser();
+    return this.http.post<any>('http://localhost:3000/api/user/' + user._id + '/cart', tempCart);
   }
 
   // Add Cart If No Cart Is On The Server
   addCart(tempCart: Cart): Observable<any> {
-    return this.http.post(this.cartUrl, tempCart, /* Http Options */)
+    var user = this.userService.getUser();
+    return this.http.post<any>('http://localhost:3000/api/user/' + user._id + '/cart', tempCart)
   }
 
   // Add Product To The Cart
   addProduct(tempCart: Cart, tempProduct: Product): void {
+    console.log("add product");
     if (!this.exists(tempCart, tempProduct)) {
       tempCart.products.push(tempProduct);
       tempCart.totalPrice += tempProduct.price;
-      this.setCartToLocalStorage(tempCart);
+      var user = this.userService.getUser();
+      if (user)
+        this.updateCart(tempCart).subscribe(function (res) { });
+      else
+        this.setCartToLocalStorage(tempCart);
     }
   }
 
@@ -45,26 +53,36 @@ export class CartService {
   removeProduct(tempCart: Cart, tempProduct: Product): void {
     var tempProducts: Product[] = [];
     for (let tempProduct2 of tempCart.products) {
-      if (tempProduct.id != tempProduct2.id) {
+      if (tempProduct._id != tempProduct2._id) {
         tempProducts.push(tempProduct2);
       }
     }
     tempCart.products = tempProducts;
     tempCart.totalPrice -= tempProduct.price;
-    this.setCartToLocalStorage(tempCart);
+    var user = this.userService.getUser();
+    if (user) {
+      this.updateCart(tempCart).subscribe(function (res) { });
+    }
+    else {
+      this.setCartToLocalStorage(tempCart);
+    }
   }
 
   // Clear Cart
   clearCart(tempCart: Cart): void {
     tempCart.products = [];
     tempCart.totalPrice = 0;
-    this.clearLocalStorage();
+    var user = this.userService.getUser();
+    if (user)
+      this.updateCart(tempCart).subscribe(function (res) { });
+    else
+      this.clearLocalStorage();
   }
 
   // Check If Product Is In The Cart
   exists(tempCart: Cart, tempProduct: Product): boolean {
     for (let tempProduct2 of tempCart.products) {
-      if (tempProduct.id == tempProduct2.id) {
+      if (tempProduct._id == tempProduct2._id) {
         return true;
       }
     }
@@ -74,7 +92,7 @@ export class CartService {
   // Get Cart From Local Storage
   getCartFromLocalStorage(): Cart {
     let tempCart = JSON.parse(localStorage.getItem("cart_t10_sprint1"));
-    return (tempCart != null)?tempCart:{products: [], totalPrice: 0};
+    return (tempCart != null) ? tempCart : { products: [], totalPrice: 0 };
   }
 
   // Save Cart To Local Storage

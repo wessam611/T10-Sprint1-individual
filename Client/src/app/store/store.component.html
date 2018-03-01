@@ -8,7 +8,7 @@
       <th id="thStoreProductsSellerName">Seller Name</th>
       <th id="thStoreProductsAddRemove">Cart Status</th>
     </tr>
-    <tr *ngFor="let product of this.products" (click)="this.cartService.addProduct(this.cartService.getCartFromLocalStorage(), product)">
+    <tr *ngFor="let product of this.products" (click)="this.cartService.addProduct(this.cart, product)">
       <td>{{ product.id }}</td>
       <td>{{ product.name | uppercase }}</td>
       <td>{{ product.price | currency }}</td>

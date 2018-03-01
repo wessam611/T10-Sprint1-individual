@@ -6,7 +6,7 @@ export class Cart {
 }
 
 export class Product {
-    id        :   number;
+    _id        :   any;
     name      :   string;
     price     :   number;
     created   :   string;

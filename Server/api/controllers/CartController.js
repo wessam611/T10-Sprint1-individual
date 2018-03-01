@@ -41,7 +41,7 @@ module.exports.postCart = function (req, res, next) {
         });
     }
 
-    if (req.body.cart.products === undefined || req.body.cart.totalPrice === undefined) {
+    if (req.body.products === undefined || req.body.totalPrice === undefined) {
         return res.status(422).json({
             err: null,
             msg: 'products and totalPrice are required fields.',
@@ -49,7 +49,7 @@ module.exports.postCart = function (req, res, next) {
         });
     }
 
-    User.findByIdAndUpdate(req.params.userId, { $set: { cart: req.body.cart } }, function (err, user) {
+    User.findByIdAndUpdate(req.params.userId, { $set: { cart: req.body } }, function (err, user) {
         if (err) {
             res.send(err);
         }
