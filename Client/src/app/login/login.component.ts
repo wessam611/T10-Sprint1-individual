@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
         self.UserService.updateUser(res.data);
          // cart update
          var cart = self.CartService.getCartFromLocalStorage();
-         if (cart) {
+         if (cart.products.length) {
            self.CartService.updateCart(cart).subscribe(function (res) { });
            self.CartService.clearLocalStorage();
          }

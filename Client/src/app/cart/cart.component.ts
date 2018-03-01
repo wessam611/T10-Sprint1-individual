@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Cart, Product } from '../definitions';
 import { CartService } from '../cart.service';
 import { NgModule } from '@angular/core';
@@ -7,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { OrderService } from '../orders/order.service';
+
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
