@@ -27,5 +27,6 @@ router.post('/user/:userId/orders', orderCtrl.postOrders);
 // Cart endpoints
 router.get('/user/:userId/cart', cartCtrl.getCart);
 router.post('/user/:userId/cart', cartCtrl.postCart);
+router.put('/user/:userId/cart', cartCtrl.postCart);
 
 module.exports = router;

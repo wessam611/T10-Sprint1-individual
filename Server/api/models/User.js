@@ -1,4 +1,5 @@
 var mongoose = require('mongoose'),
+
     Product = mongoose.model('Product'),
     productSchema = Product.schema;
 
@@ -42,7 +43,8 @@ var userSchema = mongoose.Schema({
     emailAddress: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
     },
     password: {
         type: String,
