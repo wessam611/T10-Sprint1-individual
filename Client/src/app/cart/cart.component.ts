@@ -16,9 +16,15 @@ export class CartComponent implements OnInit {
   cart: Cart;
   shippingAddress: string = null;
   showModal: string = 'none';
-  
-  constructor(private cartService: CartService, private orderService: OrderService, private userService: UserService, private router: Router) { }
-  
+
+
+  constructor(private cartService: CartService, private userService: UserService, private orderService: OrderService, private router: Router) {
+    this.cart = {
+      products: [],
+      totalPrice: 0
+    }
+  }
+
   ngOnInit() {
     var user = this.userService.getUser()
     if (user)

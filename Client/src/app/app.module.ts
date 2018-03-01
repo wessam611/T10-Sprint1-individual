@@ -14,6 +14,7 @@ import { UserService } from './user.service';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule }   from '@angular/forms';
+import { CartService } from './cart.service';
 
 @NgModule({
   declarations: [AppComponent, RegisterComponent, LoginComponent],
@@ -54,6 +55,6 @@ import { FormsModule }   from '@angular/forms';
     })
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, NbAuthService, OrderService, UserService]
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, NbAuthService, OrderService, UserService, CartService]
 })
 export class AppModule {}
