@@ -17,7 +17,7 @@ import { FormsModule }   from '@angular/forms';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, LoginComponent],
+  declarations: [AppComponent],
   imports: [
     HttpClientModule,
     BrowserModule,

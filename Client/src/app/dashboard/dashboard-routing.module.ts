@@ -18,6 +18,10 @@ const routes: Routes = [
         component: StoreComponent
       },
       {
+        path: 'auth',
+        loadChildren: './auth/auth.module#AuthModule'
+      },
+      {
         path: 'company',
         component: CompanyComponent
       },
@@ -38,6 +42,7 @@ const routes: Routes = [
         redirectTo: 'company',
         pathMatch: 'full'
       }
+      
     ]
   }
 ];

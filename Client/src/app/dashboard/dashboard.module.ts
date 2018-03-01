@@ -8,7 +8,7 @@ import { CompanyComponent } from './company/company.component';
 import { CartComponent } from '../cart/cart.component';
 import { CartService } from '../cart.service';
 import { StoreComponent } from '../store/store.component';
-import { StoreService } from '../store.service'
+import { StoreService } from '../store.service';
 import { OrdersComponent } from '../orders/orders.component';
 @NgModule({
   imports: [ThemeModule, DashboardRoutingModule],
@@ -16,4 +16,4 @@ import { OrdersComponent } from '../orders/orders.component';
   entryComponents: [],
   providers: [CartService, StoreService]
 })
-export class DashboardModule {}
+export class DashboardModule { }

@@ -26,7 +26,7 @@ module.exports.signUp = function (req, res, next) {
     if (user) {
       return res.status(422).json({
         err: null,
-        msg: 'The email you signed up with alreay exists. You should login',
+        msg: 'The email you signed up with already exists. You should login',
         data: null
       });
     } else {
