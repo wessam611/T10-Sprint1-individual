@@ -12,12 +12,11 @@ import { Location } from '@angular/common';
 export class LoginComponent implements OnInit {
 
   constructor(private UserService: UserService,
-  private location: Location) { }
+    private location: Location) { }
 
   formInput = <any>{};
 
   loginUser() {
-    console.log(this.formInput);
     var user = {
       emailAddress: this.formInput.emailAddress,
       password: this.formInput.password
@@ -27,7 +26,6 @@ export class LoginComponent implements OnInit {
       if (res.msg === 'User retrieved successfully.') {
         self.UserService.updateUser(res.data);
         self.location.back();
-        console.log(self.UserService.getUser());
       }
       else {
         alert(res.msg);
