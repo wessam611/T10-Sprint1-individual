@@ -1,4 +1,4 @@
-import { Product } from './difinitions'
+import { Product } from './definitions'
 
 export const PRODUCTS: Product[] = [
     { _id: 'a96cac517d2fe713a3f80176', name: 'Hat', price: 1, createdAt: '2018-02-28T15:29:09.225Z', sellerName: 'Maqarios' },
