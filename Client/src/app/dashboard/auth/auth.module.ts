@@ -4,7 +4,6 @@ import { ThemeModule } from '../../@theme/theme.module';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AuthRoutingModule} from './auth-routing.module';
-import { UserService } from '../../user.service';
 import { FormsModule } from '@angular/forms';
 @NgModule({
   imports: [
@@ -17,7 +16,6 @@ import { FormsModule } from '@angular/forms';
     LoginComponent
   ],
   providers: [
-    UserService
   ]
 })
 export class AuthModule { }

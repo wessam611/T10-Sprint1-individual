@@ -12,6 +12,12 @@
 
 <nb-actions size="medium" class="header-container right">
   <nb-action>
-    <nb-user [menu]="userMenu" [name]="user?.fullName" [title]="user?.userType | ngxCapitalize" (menuClick)="onMenuClick($event)"></nb-user>
+    <div *ngIf="service.user">
+      <nb-user [menu]="userLogged" [name]="service.user?.fullName" [title]="service.user?.userType | ngxCapitalize" (menuClick)="onMenuClick($event)"></nb-user>
+    </div>
+    <div *ngIf="!service.user">
+      <nb-user [menu]="userForeign" [name]="service.user?.fullName" [title]="service.user?.userType | ngxCapitalize"
+        (menuClick)="onMenuClick($event)"></nb-user>
+    </div>
   </nb-action>
 </nb-actions>
