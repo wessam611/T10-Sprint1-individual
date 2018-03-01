@@ -17,7 +17,7 @@ export class OrderService {
   postOrders (shippingAddress: string): Observable<any> {
   var userid = this.userService.getUser()._id;
   var ordersUrl = 'http://localhost:3000/api/user/'.concat(userid).concat('/orders');
-  return this.http.post<any>(ordersUrl,shippingAddress).pipe(catchError(this.handleError('postOrders', []))); }
+  return this.http.post<any>(ordersUrl,{'shippingAddress': shippingAddress}).pipe(catchError(this.handleError('postOrders', []))); }
 
   constructor(private http: HttpClient,private userService: UserService) { }
 
