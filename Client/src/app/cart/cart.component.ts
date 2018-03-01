@@ -48,9 +48,10 @@ export class CartComponent implements OnInit {
   }
   postOrders(): void {
     this.orderService.postOrders(this.shippingAddress).subscribe(function (res) {
-      if (res.msg === 'orders') {
+      if (res.msg === 'Orders') {
         alert(`Your order is on its way!`);
       }
+      console.log(res.msg);
     });
     this.showModal = 'none';
   }

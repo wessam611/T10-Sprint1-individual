@@ -9,7 +9,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import {UserService} from '../user.service';
 @Injectable()
 export class OrderService {
-  getOrders (): Observable<Order[]> {
+  getOrders (): any {
   var userid = this.userService.getUser()._id;
   var ordersUrl = 'http://localhost:3000/api/user/'.concat(userid).concat('/orders');
   return this.http.get<Order[]>(ordersUrl).pipe(catchError(this.handleError('getOrders', []))); }

@@ -107,6 +107,7 @@ module.exports.postOrders = function (req, res, next) {
             totalPrice: cart.totalPrice,
             shippingAddress: req.body.shippingAddress
         });
+        user.cart = null; // Reset Cart
         user.save(function (err) {
             if (err) {
                 return next(err);
