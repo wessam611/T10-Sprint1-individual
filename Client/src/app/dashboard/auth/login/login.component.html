@@ -13,7 +13,7 @@
           <label for="email">Email Address</label>
           <input type="text" class="form-control" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" id="email" [(ngModel)]="formInput.emailAddress"
             name="email" #email="ngModel" required>
-          <div [hidden]="email.valid || email.untouched" class="alert alert-danger">
+          <div [hidden]="email.valid || email.untouched" class="alert text-danger">
             Email is required
           </div>
         </div>
@@ -22,7 +22,7 @@
           <label for="password">Password</label>
           <input type="password" class="form-control" id="password" [(ngModel)]="formInput.password" name="password" #password="ngModel"
             required>
-          <div [hidden]="password.valid || password.untouched" class="alert alert-danger">
+          <div [hidden]="password.valid || password.untouched" class="alert text-danger">
             Password is required
           </div>
         </div>
