@@ -3,6 +3,7 @@ import { UserService } from '../../../user.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { PatternValidator } from '@angular/forms';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +12,7 @@ import { PatternValidator } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   constructor(private UserService: UserService,
-    private Router: Router) { }
+  private location: Location) { }
 
   formInput = <any>{};
 
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
     this.UserService.login(user).subscribe(function (res) {
       if (res.msg === 'User retrieved successfully.') {
         self.UserService.updateUser(res.data);
-        self.Router.navigate(['/']);
+        self.location.back();
         console.log(self.UserService.getUser());
       }
       else {
