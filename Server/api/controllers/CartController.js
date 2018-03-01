@@ -50,15 +50,13 @@ module.exports.postCart = function (req, res, next) {
     }
 
     User.findByIdAndUpdate(req.params.userId, { $set: { cart: req.body } }, function (err, user) {
-        if (err) {
-            res.send(err);
-        }
+        if (err)
+            return next(err);
 
-        if (!user) {
+        if (!user) 
             return res
                 .status(404)
                 .json({ err: null, msg: 'User not found.', data: null });
-        }
 
         res.status(201).json({
             err: null,
