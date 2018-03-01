@@ -10,25 +10,17 @@ import { UserService } from '../../../user.service';
 })
 export class HeaderComponent implements OnInit {
   @Input() position = 'normal';
-  user: any;
-  userMenu: any[];
+  userLogged: any[] = [{ title: 'Logout' }];
+  userForeign: any[] = [{ title: 'Sign up' }, { title: 'Login' }]
 
   constructor(
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     private router: Router,
-    private service : UserService
-  ) {}
+    public service: UserService
+  ) { }
 
   ngOnInit() {
-    if(this.service.getUser() !== null){
-      this.user = this.service.getUser();
-      this.userMenu = [{title:'Logout'}];
-    }
-    else{
-      this.user = null;
-      this.userMenu = [{title:'Sign up'},{title:'Login'}];
-    }
   }
 
   toggleSidebar(): boolean {
@@ -43,13 +35,12 @@ export class HeaderComponent implements OnInit {
   onMenuClick(event) {
     if (event.title === 'Logout') {
       this.service.updateUser(null);
-      this.ngOnInit();
     }
-    else if(event.title === 'Sign up'){
+    else if (event.title === 'Sign up') {
       this.router.navigate(['/dashboard/auth/register']);
     }
-    else if(event.title === 'Login'){
+    else if (event.title === 'Login') {
       this.router.navigate(['/dashboard/auth/login']);
     }
   }
-  }
+}

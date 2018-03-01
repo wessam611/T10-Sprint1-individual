@@ -28,8 +28,6 @@ export class RegisterComponent implements OnInit {
       };
 
       var self = this;
-      
-      
       this.userService.register(user).subscribe(function (res) {
           self.userService.updateUser(user);
           self.router.navigate(['/']);
