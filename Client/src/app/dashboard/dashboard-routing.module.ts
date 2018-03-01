@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
 import { CompanyComponent } from './company/company.component';
+import { CartComponent } from '../cart/cart.component'
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
         loadChildren: './items/items.module#ItemsModule'
       },
       {
+        path: 'auth',
+        loadChildren: './auth/auth.module#AuthModule'
+      },
+      {
         path: 'company',
         component: CompanyComponent
       },
@@ -21,7 +26,12 @@ const routes: Routes = [
         path: '',
         redirectTo: 'company',
         pathMatch: 'full'
+      },
+      {
+        path: 'cart',
+        component: CartComponent
       }
+      
     ]
   }
 ];
