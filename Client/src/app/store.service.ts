@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from './difinitions';
+import { Product } from './definitions';
 import { PRODUCTS } from './mock-products';
 
 @Injectable()

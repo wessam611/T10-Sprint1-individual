@@ -15,5 +15,20 @@
     </tr>
   </table>
   <br />
-  <input id="inputTotalPrice" type="button" value="Total Price: {{ this.cart.totalPrice | currency }}" title="Check Out">
+  <input id="inputTotalPrice" type="button" value="Total Price: {{ this.cart.totalPrice | currency }}" title="Checkout" (click)="checkout()">
+</div>
+<div id="myModal" class="modal" [style.display]="this.showModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Checkout</h2>
+      <span class="close" (click)="this.closeModal()">&times;</span>
+    </div>
+    <div class="modal-body">
+    <p>Total cost: {{this.cart.totalPrice | currency}}</p>
+      <label for="address">Shipping address: </label>
+      <input [(ngModel)]="this.shippingAddress" placeholder="type the shipping address">
+      <button id="inputTotalPrice" (click)="this.postOrders()">confirm order</button>
+    </div>
+  </div>
+
 </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Cart, Product } from './difinitions'
+import { Cart, Product } from './definitions'
 import { PRODUCTS } from './mock-products'; // To Be Removed
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
@@ -7,6 +7,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { UserService } from './user.service';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class CartService {
@@ -17,7 +20,7 @@ export class CartService {
   getCart(): any {
     var user = this.userService.getUser();
     if (user)
-      return this.http.get<any>('http://localhost:3000/api/user/' + user._id + '/cart');
+      return this.http.get<any>('http://localhost:3000/api/user/' + user._id + '/cart', httpOptions);
     else
       return this.getCartFromLocalStorage();
 
@@ -26,18 +29,17 @@ export class CartService {
   // Update Cart
   updateCart(tempCart: Cart): Observable<any> {
     var user = this.userService.getUser();
-    return this.http.post<any>('http://localhost:3000/api/user/' + user._id + '/cart', tempCart);
+    return this.http.post<any>('http://localhost:3000/api/user/' + user._id + '/cart', tempCart, httpOptions);
   }
 
   // Add Cart If No Cart Is On The Server
   addCart(tempCart: Cart): Observable<any> {
     var user = this.userService.getUser();
-    return this.http.post<any>('http://localhost:3000/api/user/' + user._id + '/cart', tempCart)
+    return this.http.post<any>('http://localhost:3000/api/user/' + user._id + '/cart', tempCart, httpOptions)
   }
 
   // Add Product To The Cart
   addProduct(tempCart: Cart, tempProduct: Product): void {
-    console.log("add product");
     if (!this.exists(tempCart, tempProduct)) {
       tempCart.products.push(tempProduct);
       tempCart.totalPrice += tempProduct.price;

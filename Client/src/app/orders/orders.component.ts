@@ -16,7 +16,7 @@ export class OrdersComponent implements OnInit {
   orders: Order[];
   constructor(private orderService:OrderService, private userService:UserService,private router: Router) { }
   getOrders(): void {
-  this.orderService.getOrders().subscribe(res => this.orders = res['orders']);
+  this.orderService.getOrders().subscribe(res => this.orders = res.data);
 }
 
   ngOnInit() {

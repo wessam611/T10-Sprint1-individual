@@ -1,9 +1,6 @@
 <h2 class="title">Log In</h2>
   <form (ngSubmit)="loginUser()" #login="ngForm">
-
-
     <!-- start of boxes -->
-
     <div class="form-group">
       <label for="email">Email Address</label>
       <input type="text" class="form-control" pattern="^[^@\s]+@[^@\s]+\.[^@\s]+$" id="email" [(ngModel)]="formInput.emailAddress" name="email" #email="ngModel" required>
@@ -11,7 +8,6 @@
         Email is required
       </div>
     </div>
-
     <div class="form-group">
       <label for="password">Password</label>
       <input type="password" class="form-control" id="password" [(ngModel)]="formInput.password" name="password" #password="ngModel" required>
@@ -19,7 +15,6 @@
         Password is required
       </div>
     </div>
-
     <button type="submit" class="btn btn-block btn-hero-success" [disabled]="!login.form.valid">Login</button>
   </form>
   <div class="form-group">

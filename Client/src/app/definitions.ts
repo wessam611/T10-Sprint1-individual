@@ -9,7 +9,7 @@ export class Product {
     _id        :   any;
     name      :   string;
     price     :   number;
-    created   :   string;
-    updated   :   string;
+    createdAt   :   string;
+    //updatedAt   :   string;
     sellerName:   string;
 }
