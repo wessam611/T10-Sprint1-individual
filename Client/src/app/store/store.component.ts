@@ -38,23 +38,23 @@ export class StoreComponent implements OnInit {
       ]
     },
     columns: {
-      sellerName: {
-        title: 'seller',
-        type: 'number'
-      },
       name: {
         title: 'Product',
         type: 'string',
       },
       price: {
-        title: 'price',
+        title: 'Price',
         type: 'number',
         valuePrepareFunction: function (amount) {
           return new CurrencyPipe('en-EN').transform(amount, "$", "symbol");
         }
       },
+      sellerName: {
+        title: 'Seller',
+        type: 'number'
+      },
       createdAt: {
-        title: 'creation Date',
+        title: 'Creation Date',
         type: 'date',
         editable: false,
         addable: false,
@@ -87,7 +87,7 @@ export class StoreComponent implements OnInit {
   }
 
   getProducts(): void {
-    this.storeService.getProducts().subscribe(function(res){
+    this.storeService.getProducts().subscribe(function (res) {
       return res.data;
     });
   }
@@ -97,7 +97,7 @@ export class StoreComponent implements OnInit {
     this.storeService.getProducts()
       .subscribe(function (res) {
         if (!res) return;
-        if (!res.data) {  
+        if (!res.data) {
           self.handleError("noRead");
           return;
         }
@@ -126,7 +126,7 @@ export class StoreComponent implements OnInit {
       return;
     }
   }
-  onCustom(event){
-    this.cartService.addProduct(this.cart,event.data);
+  onCustom(event) {
+    this.cartService.addProduct(this.cart, event.data);
   }
 }

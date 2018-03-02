@@ -46,7 +46,7 @@ export class CartComponent implements OnInit {
     },
     columns: {
       name: {
-        title: 'Name',
+        title: 'Product',
         type: 'string'
       },
       price: {
