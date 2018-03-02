@@ -33,7 +33,7 @@ export class StoreComponent implements OnInit {
       custom: [
         {
           name: 'Buy',
-          title: '<i class="nb-checkmark pt-5"></i>'
+          title: '<i class="ion-ios-cart"></i>'
         }
       ]
     },
