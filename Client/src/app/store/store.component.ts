@@ -5,7 +5,7 @@ import { CartService } from '../cart.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { UserService } from '../user.service';
 import { MessageService } from '../message.service';
-// import { DatePipe, CurrencyPipe } from '@angular/common';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
@@ -47,10 +47,7 @@ export class StoreComponent implements OnInit {
     //   ]
     // },
     columns: {
-      // _id: {
-      //   title: 'ID',
-      //   type: 'string'
-      // },
+     
       name: {
         title: 'Product Name',
         type: 'string'
@@ -97,7 +94,7 @@ export class StoreComponent implements OnInit {
   constructor(
     private storeService: StoreService,
     private userService: UserService
-    // private datePipe: DatePipe
+   
   ) { }
 
   ngOnInit() {
@@ -113,7 +110,7 @@ export class StoreComponent implements OnInit {
   onDeleteConfirm(event) {
     this.user = this.userService.getUser();
     if (this.user && (this.user.userType == 'admin')) {
-      // alert(`Custom event '${event.action}' fired on row №: ${event.data.id}`);
+     
       this.storeService.deleteProduct(event.data).subscribe(
         response => response.err == null ? event.confirm.resolve() : event.confirm.reject()
       );
@@ -128,7 +125,7 @@ export class StoreComponent implements OnInit {
   onCreateConfirm(event) {
     this.user = this.userService.getUser();
     if (this.user && (this.user.userType == 'admin' || this.user.userType == 'manager')) {
-      // alert(`Custom event '${event.action}' fired on row №: ${event.data.id}`);
+     
       this.storeService.createProduct(event.newData).subscribe(
         response => {
           if (response.err == null) {
@@ -173,7 +170,5 @@ export class StoreComponent implements OnInit {
     return returnValue;
   }
 
-  // onCustom(event) {
-  //   this.cartService.addProduct(event.data);
-  // }
+
 }
