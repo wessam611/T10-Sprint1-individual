@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
 
       var self = this;
       this.userService.register(user).subscribe(function (res) {
-        self.userService.updateUser(user);
+        self.userService.updateUser(res.data);
         // cart update
         var cart = self.CartService.getCartFromLocalStorage();
         if (cart.products.length) {

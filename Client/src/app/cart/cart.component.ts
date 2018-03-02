@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { OrderService } from '../orders/order.service';
+import { NbThemeService } from '@nebular/theme';
 
 @Component({
   selector: 'app-cart',
@@ -16,13 +17,31 @@ export class CartComponent implements OnInit {
   cart: Cart;
   shippingAddress: string = null;
   showModal: string = 'none';
+  hb: any;
 
 
-  constructor(private cartService: CartService, private userService: UserService, private orderService: OrderService, private router: Router) {
+  constructor(private cartService: CartService, private userService: UserService, private orderService: OrderService, private router: Router, private themeService: NbThemeService) {
     this.cart = {
       products: [],
       totalPrice: 0
-    }
+    };
+    this.themeService.getJsTheme().subscribe(theme => {
+      var colors = theme.variables;
+      this.hb = {
+        class: 'btn-hero-success',
+        default: {
+          gradientLeft: `adjust-hue(${colors.success}, 20deg)`,
+          gradientRight: colors.success,
+        },
+        cosmic: {
+          gradientLeft: `adjust-hue(${colors.success}, 20deg)`,
+          gradientRight: colors.success,
+          bevel: `shade(${colors.success}, 14%)`,
+          shadow: 'rgba (33, 7, 77, 0.5)',
+          glow: `adjust-hue(${colors.success}, 10deg)`,
+        }
+      }
+    });
   }
 
   ngOnInit() {
