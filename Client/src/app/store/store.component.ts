@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StoreService } from '../store.service';
 import { Product } from '../product';
 import { CartService } from '../cart.service';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-store',
@@ -10,6 +11,8 @@ import { CartService } from '../cart.service';
 })
 export class StoreComponent implements OnInit {
 
+  datePipe = new DatePipe('en-EN');
+  currencyPipe = new CurrencyPipe('en-EN');
   products: Product[];
 
   settings = {
@@ -19,7 +22,7 @@ export class StoreComponent implements OnInit {
     },
     add: {
       confirmCreate: true,
-      addButtonContent	: '<i mdTooltip="Tooltip!" class="fa fa-plus"></i>',
+      addButtonContent: '<i mdTooltip="Tooltip!" class="fa fa-plus"></i>',
       createButtonContent: '<i mdTooltip="Tooltip!" class="fa fa-save"></i>',
       cancelButtonContent: '<i mdTooltip="Tooltip!" class="fa fa-close"></i>'
     },
@@ -49,7 +52,13 @@ export class StoreComponent implements OnInit {
       },
       price: {
         title: 'Price',
-        type: 'number'
+        type: 'number',
+        valuePrepareFunction: (price) => {
+          var raw = price;
+
+          var formatted = this.currencyPipe.transform(raw, 'USD', 'symbol');
+          return formatted;
+        }
       },
       sellerName: {
         title: 'Seller',
@@ -57,16 +66,32 @@ export class StoreComponent implements OnInit {
       },
       createdAt: {
         title: 'createdAt',
-        editable: false
+        editable: false,
+        valuePrepareFunction: (date) => {
+          var raw = new Date(date);
+
+          var formatted = this.datePipe.transform(raw, 'dd MMM yyyy');
+          return formatted;
+        }
       },
       updatedAt: {
         title: 'updatedAt',
-        editable: false
+        editable: false,
+        valuePrepareFunction: (date) => {
+          var raw = new Date(date);
+
+          var formatted = this.datePipe.transform(raw, 'dd MMM yyyy');
+          return formatted;
+        }
       }
     }
   };
 
-  constructor(private storeService: StoreService, private cartService: CartService) { }
+  constructor(
+    private storeService: StoreService,
+    private cartService: CartService
+    // private datePipe: DatePipe
+  ) { }
 
   ngOnInit() {
     this.getProducts();
@@ -96,6 +121,7 @@ export class StoreComponent implements OnInit {
       response => response.err == null ? event.confirm.resolve(event.newData) : event.confirm.reject()
     );
   }
+
 
   // onCustom(event) {
   //   this.cartService.addProduct(event.data);

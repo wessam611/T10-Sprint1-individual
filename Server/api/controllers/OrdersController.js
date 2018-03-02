@@ -82,7 +82,7 @@ module.exports.postOrders = function (req, res, next) {
 
         // Validating cart
         var cart = user.cart;
-        if (!cart || cart.length == 0) {
+        if (!cart || cart.products.length == 0) {
             return res
                 .status(400)
                 .json({
@@ -102,10 +102,14 @@ module.exports.postOrders = function (req, res, next) {
                     body: null
                 });
         }
-        var order = user.orders.create({
+        var order = user.orders.push({
             products: cart.products,
             totalPrice: cart.totalPrice,
             shippingAddress: req.body.shippingAddress
+        });
+        user.cart.set({
+            totalPrice: 0,
+            products: []
         });
         user.save(function (err) {
             if (err) {
