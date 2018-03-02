@@ -157,7 +157,6 @@ export class CartComponent implements OnInit {
       if (res.msg === 'Orders') {
         alert(`Your order is on its way!`);
       }
-      console.log(res.msg);
     },
     function(error)
     {

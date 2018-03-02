@@ -112,8 +112,7 @@ export class StoreComponent implements OnInit {
 
   onDeleteConfirm(event) {
     this.user = this.userService.getUser();
-    console.log(this.user + "%%%%%%%%%%%%%%%%%%%%%%%%%%");
-    if (this.user && (this.user.userType == 'Admin')) {
+    if (this.user && (this.user.userType == 'admin')) {
       // alert(`Custom event '${event.action}' fired on row №: ${event.data.id}`);
       this.storeService.deleteProduct(event.data).subscribe(
         response => response.err == null ? event.confirm.resolve() : event.confirm.reject()
@@ -128,7 +127,7 @@ export class StoreComponent implements OnInit {
 
   onCreateConfirm(event) {
     this.user = this.userService.getUser();
-    if (this.user && (this.user.userType == 'Admin' || this.user.userType == 'Manager')) {
+    if (this.user && (this.user.userType == 'admin' || this.user.userType == 'manager')) {
       // alert(`Custom event '${event.action}' fired on row №: ${event.data.id}`);
       this.storeService.createProduct(event.newData).subscribe(
         response => {
@@ -150,7 +149,7 @@ export class StoreComponent implements OnInit {
 
   onSaveConfirm(event) {
     this.user = this.userService.getUser();
-    if (this.user && (this.user.userType == 'Admin' || this.user.userType == 'Manager')) {
+    if (this.user && (this.user.userType == 'admin' || this.user.userType == 'manager')) {
       // alert(`Custom event '${event.action}' fired on row №: ${event.data.id}`);
       this.storeService.updateProduct(event.newData).subscribe(
         response => response.err == null ? event.confirm.resolve(event.newData) : event.confirm.reject()
