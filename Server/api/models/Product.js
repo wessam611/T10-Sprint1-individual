@@ -12,8 +12,8 @@ module.exports.productSchema = mongoose.Schema({
     required: true,
     min: 0
   },
-  type: Date,
-    createdAt: {
+  createdAt: {
+    type: Date,
     default: Date.now
   },
   updatedAt: Date,
