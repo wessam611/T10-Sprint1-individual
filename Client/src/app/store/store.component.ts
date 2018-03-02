@@ -29,15 +29,15 @@ export class StoreComponent implements OnInit {
       saveButtonContent: '<i mdTooltip="Tooltip!" class="fa fa-save"></i>',
       cancelButtonContent: '<i mdTooltip="Tooltip!" class="fa fa-close"></i>'
     },
-    actions: {
+    // actions: {
 
-      custom: [
-        {
-          name: 'addToCart',
-          title: '<i class="fa fa-shopping-cart"></i>'
-        },
-      ]
-    },
+    //   custom: [
+    //     {
+    //       name: 'addToCart',
+    //       title: '<i class="fa fa-shopping-cart"></i>'
+    //     },
+    //   ]
+    // },
     columns: {
       // _id: {
       //   title: 'ID',
@@ -97,7 +97,7 @@ export class StoreComponent implements OnInit {
     );
   }
 
-  onCustom(event) {
-    this.cartService.addProduct(event.data);
-  }
+  // onCustom(event) {
+  //   this.cartService.addProduct(event.data);
+  // }
 }

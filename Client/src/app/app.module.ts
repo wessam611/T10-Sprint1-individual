@@ -11,8 +11,8 @@ import { AppComponent } from './app.component';
 import {NbEmailPassAuthProvider, NbAuthModule, NbAuthService} from '@nebular/auth';
 import { OrderService } from './orders/order.service';
 import { UserService } from './user.service';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
+// import { RegisterComponent } from './register/register.component';
+// import { LoginComponent } from './login/login.component';
 import { FormsModule }   from '@angular/forms';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 

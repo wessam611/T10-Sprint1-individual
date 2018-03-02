@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import {Order} from './Order';
-import {Product} from '../Product';
+import {Product} from '../product';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HeaderComponent } from '../@theme/components/header/header.component';
 import { catchError, map, tap } from 'rxjs/operators';

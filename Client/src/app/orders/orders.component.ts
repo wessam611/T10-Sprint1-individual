@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Order} from './Order';
 import {OrderService} from './order.service';
 import { Router } from '@angular/router';
-import {Product} from '../Product';
+import {Product} from '../product';
 import {UserService} from '../user.service';
 
 @Component({
