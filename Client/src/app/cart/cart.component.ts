@@ -7,6 +7,8 @@ import { UserService } from '../user.service';
 import { Router } from '@angular/router';
 import { OrderService } from '../orders/order.service';
 import { NbThemeService } from '@nebular/theme';
+import { DatePipe } from '@angular/common';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
@@ -19,8 +21,76 @@ export class CartComponent implements OnInit {
   showModal: string = 'none';
   hb: any;
 
+  source: any;
 
-  constructor(private cartService: CartService, private userService: UserService, private orderService: OrderService, private router: Router, private themeService: NbThemeService) {
+  settings = {
+    actions: {
+      add: false,
+      edit: false
+    },
+    add: {
+      addButtonContent: '<i class="nb-plus"></i>',
+      createButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+      confirmCreate: true
+    },
+    edit: {
+      editButtonContent: '<i class="nb-edit"></i>',
+      saveButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+      confirmSave: true
+    },
+    delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true
+    },
+    columns: {
+      name: {
+        title: 'Name',
+        type: 'string'
+      },
+      price: {
+        title: 'Price',
+        type: 'number',
+        valuePrepareFunction: (price) => {
+          var formatted = this.currencyPipe.transform(price);
+          return formatted;
+        }
+      },
+      sellerName: {
+        title: 'Seller Name',
+        type: 'string'
+      },
+      createdAt: {
+        title: 'Creation Date',
+        type: 'string',
+        valuePrepareFunction: (date) => {
+          if (!date)
+            return 'N/A';
+          var raw = new Date(date);
+          var formatted = this.datePipe.transform(raw, 'dd MMM yyyy');
+          return formatted;
+        },
+        editable: false
+      },
+      updatedAt: {
+        title: 'Last Modified',
+        type: 'string',
+        valuePrepareFunction: (date) => {
+          if (!date)
+            return 'N/A';
+          var raw = new Date(date);
+          var formatted = this.datePipe.transform(raw, 'dd MMM yyyy');
+          return formatted;
+        },
+        editable: false
+      }
+    }
+  }
+
+
+  constructor(private cartService: CartService, private userService: UserService, private orderService: OrderService,
+    private router: Router, private themeService: NbThemeService, private datePipe: DatePipe, private currencyPipe: CurrencyPipe) {
     this.cart = {
       products: [],
       totalPrice: 0
@@ -47,14 +117,31 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     var user = this.userService.getUser()
     if (user)
-      this.cartService.getCart().subscribe(res => this.cart = res.data);
-    else
+      this.cartService.getCart().subscribe(res => {
+        this.cart = res.data;
+        this.source = res.data.products
+      });
+    else {
       this.cart = this.cartService.getCartFromLocalStorage();
+      this.source = this.cartService.getCartFromLocalStorage().products;
+    }
   }
 
   getCart(): void {
     this.cartService.getCart().subscribe(cart => this.cart = cart);
 
+  }
+
+  onDeleteConfirm(event): void {
+    if (window.confirm(
+      'Name: ' + event.data.name +
+      '\nPrice: ' + this.currencyPipe.transform(event.data.price) +
+      '\nSeller Name: ' + event.data.sellerName +
+      '\nDelete product?'
+    )) {
+      this.cartService.removeProduct(this.cart, event.data)
+      event.confirm.resolve();
+    }
   }
 
   checkout(): void {

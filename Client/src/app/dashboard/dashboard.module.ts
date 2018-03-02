@@ -9,11 +9,12 @@ import { StoreComponent } from '../store/store.component';
 import { StoreService } from '../store.service'
 import { OrdersComponent } from '../orders/orders.component';
 import { FormsModule } from '@angular/forms';
+import { DatePipe, CurrencyPipe } from '@angular/common';
 
 @NgModule({
   imports: [ThemeModule, DashboardRoutingModule, FormsModule],
   declarations: [DashboardComponent, CompanyComponent, StoreComponent, OrdersComponent, CartComponent],
   entryComponents: [],
-  providers: [CartService, StoreService]
+  providers: [CartService, StoreService, DatePipe, CurrencyPipe]
 })
 export class DashboardModule { }
