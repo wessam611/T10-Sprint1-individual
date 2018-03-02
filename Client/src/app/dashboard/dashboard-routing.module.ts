@@ -3,7 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
 import { CompanyComponent } from './company/company.component';
-import { CartComponent } from '../cart/cart.component'
+import { StoreComponent } from '../store/store.component';
+import { OrdersComponent } from '../orders/orders.component';
+import { CartComponent } from '../cart/cart.component';
 
 const routes: Routes = [
   {
@@ -12,7 +14,8 @@ const routes: Routes = [
     children: [
       {
         path: 'items',
-        loadChildren: './items/items.module#ItemsModule'
+        // loadChildren: './items/items.module#ItemsModule'
+        component: StoreComponent
       },
       {
         path: 'auth',
@@ -23,13 +26,21 @@ const routes: Routes = [
         component: CompanyComponent
       },
       {
-        path: '',
-        redirectTo: 'company',
-        pathMatch: 'full'
+        path: 'store',
+        component: StoreComponent
+      },
+      {
+        path: 'orders',
+      component: OrdersComponent
       },
       {
         path: 'cart',
         component: CartComponent
+      },
+      {
+        path: '',
+        redirectTo: 'company',
+        pathMatch: 'full'
       }
       
     ]

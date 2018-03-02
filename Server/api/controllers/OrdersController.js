@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
     auth = require('basic-auth'),
-    Validation = require('../utils/Validations'),
+    Validations = require('../utils/Validations'),
     User = mongoose.model('User'),
     Product = mongoose.model('Product');
 
@@ -15,8 +15,15 @@ module.exports.getOrders = function (req, res, next) {
     var userId = req.params.userId;
 
     // Validating the userId
+    if (!Validations.isObjectId(userId)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'userId parameter must be a valid ObjectId.',
+            data: null
+        });
+    }
     var user = User.findOne({
-        id: userId
+        _id: userId
     }).exec(function (err, user) {
         if (err) {
             return next(err);
@@ -50,8 +57,15 @@ module.exports.postOrders = function (req, res, next) {
     var userId = req.params.userId;
 
     // Validating the userId
+    if (!Validations.isObjectId(userId)) {
+        return res.status(422).json({
+            err: null,
+            msg: 'userId parameter must be a valid ObjectId.',
+            data: null
+        });
+    }
     var user = User.findOne({
-        id: userId
+        _id: userId
     }).exec(function (err, user) {
         if (err) {
             return next(err);
@@ -68,9 +82,9 @@ module.exports.postOrders = function (req, res, next) {
 
         // Validating cart
         var cart = user.cart;
-        if (length(cart) == 0) {
+        if (!cart || cart.length == 0) {
             return res
-                .status(404)
+                .status(400)
                 .json({
                     err: 'Cart is empty',
                     msg: null,
@@ -81,7 +95,7 @@ module.exports.postOrders = function (req, res, next) {
         var shippingAddress = req.body.shippingAddress;
         if (!shippingAddress) {
             return res
-                .status(404)
+                .status(400)
                 .json({
                     err: 'Shipping address isn\'t provided',
                     msg: null,
@@ -108,3 +122,4 @@ module.exports.postOrders = function (req, res, next) {
 
     });
 };
+

@@ -6,12 +6,14 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { CompanyComponent } from './company/company.component';
 import { CartComponent } from '../cart/cart.component';
-import { FormsModule } from '@angular/forms';
-
+import { CartService } from '../cart.service';
+import { StoreComponent } from '../store/store.component';
+import { StoreService } from '../store.service';
+import { OrdersComponent } from '../orders/orders.component';
 @NgModule({
-  imports: [ThemeModule, DashboardRoutingModule, FormsModule],
-  declarations: [DashboardComponent, CompanyComponent, CartComponent],
+  imports: [ThemeModule, DashboardRoutingModule],
+  declarations: [DashboardComponent,CompanyComponent, StoreComponent,OrdersComponent, CartComponent],
   entryComponents: [],
-  providers: []
+  providers: [CartService, StoreService]
 })
 export class DashboardModule { }

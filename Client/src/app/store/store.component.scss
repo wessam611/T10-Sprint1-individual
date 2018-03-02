@@ -1,4 +1,4 @@
-#tableCartProducts th {
+#tableStoreProducts th {
     background-color: rgb(134, 221, 112);
     color: white;
     font-family: Arial, Helvetica, sans-serif;
@@ -6,7 +6,7 @@
     padding: 0.5vw;
     text-align: left;
 }
-#tableCartProducts td {
+#tableStoreProducts td {
     font-family: sans-serif;
     border-radius: 0.3vw;
     font-size: 1.3vw;
@@ -14,16 +14,19 @@
     padding-left: 0.5vw;
     text-align: left;
 }
-#tableCartProducts tr:hover {
+#tableStoreProducts tr:hover {
     background-color: rgb(220, 220, 220);
 }
-#thCartProductsName {
+#thStoreProductsId {
+    width: 3vw;
+}
+#thStoreProductsName {
     width: 35vw;
 }
-#thCartProductsPrice {
+#thStoreProductsPrice {
     width: 10vw;
 }
-#thCartProductsSellerName {
+#thStoreProductsSellerName {
     width: 15vw;
 }
 #inputTotalPrice {

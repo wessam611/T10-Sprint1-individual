@@ -11,6 +11,8 @@ var express = require('express'),
 
 app.set('secret', config.SECRET);
 
+app.disable('etag');
+
 app.use(logger(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 app.use(
   cors({
