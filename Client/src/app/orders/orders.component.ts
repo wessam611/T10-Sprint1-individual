@@ -16,12 +16,12 @@ export class OrdersComponent implements OnInit {
   orders: Order[];
   constructor(private orderService:OrderService, private userService:UserService,private router: Router) { }
   getOrders(): void {
-  this.orderService.getOrders().subscribe(res => this.orders = res['orders']);
+  this.orderService.getOrders().subscribe(res => this.orders = res.data);
 }
 
   ngOnInit() {
     if(this.userService.getUser()===null){
-      this.router.navigate(['auth/login']);
+      this.router.navigate(['dashboard/auth/login']);
     }
     else{
     this.getOrders();

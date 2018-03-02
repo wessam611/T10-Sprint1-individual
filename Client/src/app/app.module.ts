@@ -15,6 +15,11 @@ import { UserService } from './user.service';
 // import { LoginComponent } from './login/login.component';
 import { FormsModule }   from '@angular/forms';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+// import { UserService } from './user.service';
+// import { FormsModule }   from '@angular/forms';
+import { CartService } from './cart.service';
+// import { OrderService } from './orders/order.service';
+import { MessageService } from './message.service';
 
 @NgModule({
   declarations: [AppComponent],

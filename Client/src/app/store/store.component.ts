@@ -4,11 +4,18 @@ import { Product } from '../product';
 import { CartService } from '../cart.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { UserService } from '../user.service';
+import { MessageService } from '../message.service';
+// import { DatePipe, CurrencyPipe } from '@angular/common';
+import { LocalDataSource } from 'ng2-smart-table';
 
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
-  styleUrls: ['./store.component.scss']
+  styles: [`
+    nb-card {
+      transform: translate3d(0, 0, 0);
+    }
+  `]
 })
 export class StoreComponent implements OnInit {
 

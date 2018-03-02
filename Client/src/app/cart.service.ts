@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
-import { Cart, Product } from './difinitions'
-import { PRODUCTS } from './mock-products'; // To Be Removed
+import { Cart, Product } from './definitions'
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { UserService } from './user.service';
+import { MessageService } from './message.service';
 
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 export class CartService {
 
-  constructor(private http: HttpClient, private userService: UserService) { }
+  constructor(private http: HttpClient, private userService: UserService, private messageService: MessageService) { }
 
   // Return Cart
   getCart(): any {
     var user = this.userService.getUser();
     if (user)
-      return this.http.get<any>('http://localhost:3000/api/user/' + user._id + '/cart');
+      return this.http.get<any>('http://localhost:3000/api/user/' + user._id + '/cart', httpOptions);
     else
       return this.getCartFromLocalStorage();
 
@@ -26,22 +29,22 @@ export class CartService {
   // Update Cart
   updateCart(tempCart: Cart): Observable<any> {
     var user = this.userService.getUser();
-    return this.http.post<any>('http://localhost:3000/api/user/' + user._id + '/cart', tempCart);
+    return this.http.post<any>('http://localhost:3000/api/user/' + user._id + '/cart', tempCart, httpOptions);
   }
 
   // Add Cart If No Cart Is On The Server
   addCart(tempCart: Cart): Observable<any> {
     var user = this.userService.getUser();
-    return this.http.post<any>('http://localhost:3000/api/user/' + user._id + '/cart', tempCart)
+    return this.http.post<any>('http://localhost:3000/api/user/' + user._id + '/cart', tempCart, httpOptions)
   }
 
   // Add Product To The Cart
   addProduct(tempCart: Cart, tempProduct: Product): void {
-    console.log("add product");
     if (!this.exists(tempCart, tempProduct)) {
       tempCart.products.push(tempProduct);
       tempCart.totalPrice += tempProduct.price;
       var user = this.userService.getUser();
+      this.messageService.viewSuccess('Added product ' + tempProduct.name + ' to the cart successfully');
       if (user)
         this.updateCart(tempCart).subscribe(function (res) { });
       else

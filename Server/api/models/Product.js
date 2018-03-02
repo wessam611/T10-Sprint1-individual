@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-module.exports.productSchema = mongoose.Schema({
+var productSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -25,7 +25,4 @@ module.exports.productSchema = mongoose.Schema({
   stock: Number
 });
 
-
-
-var Product = mongoose.model('Product', module.exports.productSchema);
-
+mongoose.model('Product', productSchema);
