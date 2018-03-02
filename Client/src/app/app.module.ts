@@ -11,6 +11,7 @@ import { UserService } from './user.service';
 import { FormsModule }   from '@angular/forms';
 import { CartService } from './cart.service';
 import { OrderService } from './orders/order.service';
+import { MessageService } from './message.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,6 @@ import { OrderService } from './orders/order.service';
     AppRoutingModule
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, UserService, OrderService, CartService]
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, UserService, OrderService, CartService, MessageService]
 })
 export class AppModule {}

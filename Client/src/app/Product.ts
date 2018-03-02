@@ -1,7 +1,8 @@
-export class Product{
-id: Number
-name: String;
-price: Number;
-createdAt: string;
-updatedAt: string;
+export class Product {
+    _id: string;
+    name: string;
+    price: number;
+    sellerName: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
