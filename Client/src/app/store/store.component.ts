@@ -33,7 +33,7 @@ export class StoreComponent implements OnInit {
       custom: [
         {
           name: 'Buy',
-          title: '<i class="ion-cash pt-4"></i>'
+          title: '<i class="nb-checkmark pt-5"></i>'
         }
       ]
     },
@@ -54,23 +54,23 @@ export class StoreComponent implements OnInit {
         }
       },
       createdAt: {
-        title: 'createdAt',
+        title: 'creation Date',
         type: 'date',
         editable: false,
         addable: false,
         valuePrepareFunction: function (date) {
-          if (date === "") return;
+          if (date === "") return 'N/A';
           var input = new Date(date);
           return new DatePipe('en-EN').transform(input, "M/d/yy");
         }
       },
       updatedAt: {
-        title: 'updatedAt',
+        title: 'Last Modified ',
         type: 'date',
         editable: false,
         addable: false,
         valuePrepareFunction: function (date) {
-          if (date === "") return;
+          if (date === "") return 'N/A';
           var input = new Date(date);
           return new DatePipe('en-EN').transform(input, "M/d/yy");
         }

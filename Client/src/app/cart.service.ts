@@ -5,6 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { UserService } from './user.service';
+import { MessageService } from './message.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,7 +14,7 @@ const httpOptions = {
 @Injectable()
 export class CartService {
 
-  constructor(private http: HttpClient, private userService: UserService) { }
+  constructor(private http: HttpClient, private userService: UserService, private messageService: MessageService) { }
 
   // Return Cart
   getCart(): any {
@@ -43,6 +44,7 @@ export class CartService {
       tempCart.products.push(tempProduct);
       tempCart.totalPrice += tempProduct.price;
       var user = this.userService.getUser();
+      this.messageService.viewSuccess('Added product ' + tempProduct.name + ' to the cart successfully');
       if (user)
         this.updateCart(tempCart).subscribe(function (res) { });
       else
