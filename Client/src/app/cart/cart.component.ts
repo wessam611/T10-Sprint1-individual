@@ -158,6 +158,10 @@ export class CartComponent implements OnInit {
         alert(`Your order is on its way!`);
       }
       console.log(res.msg);
+    },
+    function(error)
+    {
+      alert('address must be specified');
     });
     this.showModal = 'none';
     this.router.navigate(['dashboard/orders']);

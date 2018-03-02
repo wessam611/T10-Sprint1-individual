@@ -29,8 +29,8 @@
     <div class="modal-body">
       <p>Total cost: {{this.cart.totalPrice | currency}}</p>
       <label for="address">Shipping address: </label>
-      <input [(ngModel)]="this.shippingAddress" placeholder="type the shipping address">
-      <button id="inputTotalPrice" (click)="this.postOrders()">confirm order</button>
+      <input style="border-radius: 0.5vw;" [(ngModel)]="this.shippingAddress" placeholder=" Type the shipping address">
+      <button class="btn {{ hb.class }} btn-demo" style="float:right;" (click)="this.postOrders()">confirm order</button>
     </div>
   </div>
 
