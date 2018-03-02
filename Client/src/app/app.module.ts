@@ -34,6 +34,6 @@ import { MessageService } from './message.service';
     Ng2SmartTableModule
   ],
   bootstrap: [AppComponent],
-  providers: [{ provide: APP_BASE_HREF, useValue: '/' }, NbAuthService, OrderService, UserService]
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' },MessageService, NbAuthService, OrderService, UserService]
 })
 export class AppModule {}

@@ -11,11 +11,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 @Component({
   selector: 'app-store',
   templateUrl: './store.component.html',
-  styles: [`
-    nb-card {
-      transform: translate3d(0, 0, 0);
-    }
-  `]
+  styles: []
 })
 export class StoreComponent implements OnInit {
 
