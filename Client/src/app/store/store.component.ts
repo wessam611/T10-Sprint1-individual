@@ -53,12 +53,12 @@ export class StoreComponent implements OnInit {
       price: {
         title: 'Price',
         type: 'number',
-        valuePrepareFunction: (price) => {
-          var raw = price;
+        // valuePrepareFunction: (price) => {
+        //   var raw = price;
 
-          var formatted = this.currencyPipe.transform(raw, 'USD', 'symbol');
-          return formatted;
-        }
+        //   var formatted = this.currencyPipe.transform(raw, 'USD', 'symbol');
+        //   return formatted;
+        // }
       },
       sellerName: {
         title: 'Seller',
@@ -78,6 +78,8 @@ export class StoreComponent implements OnInit {
         title: 'updatedAt',
         editable: false,
         valuePrepareFunction: (date) => {
+          if(date == "")
+            return "";
           var raw = new Date(date);
 
           var formatted = this.datePipe.transform(raw, 'dd MMM yyyy');
@@ -99,7 +101,7 @@ export class StoreComponent implements OnInit {
 
 
   getProducts(): void {
-    this.storeService.getProducts().subscribe(products => this.products = products.data);
+    this.storeService.getProducts().subscribe(products => this.products = this.filterProducts(products.data));
   }
 
 
@@ -122,6 +124,16 @@ export class StoreComponent implements OnInit {
     );
   }
 
+  filterProducts(products: Product[]): Product[]{
+    var returnValue = [];
+    for(var i = 0; i<products.length; i++){
+      var product = products[i];
+      if (product.sellerName == 'Wessam'){
+        returnValue.push(product);
+      }
+    }
+    return returnValue;
+  }
 
   // onCustom(event) {
   //   this.cartService.addProduct(event.data);
