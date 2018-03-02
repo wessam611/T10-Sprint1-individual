@@ -3,6 +3,7 @@ import { StoreService } from '../store.service';
 import { Product } from '../product';
 import { CartService } from '../cart.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-store',
@@ -14,6 +15,7 @@ export class StoreComponent implements OnInit {
   datePipe = new DatePipe('en-EN');
   currencyPipe = new CurrencyPipe('en-EN');
   products: Product[];
+  user = null;
 
   settings = {
     delete: {
@@ -67,7 +69,6 @@ export class StoreComponent implements OnInit {
       },
       createdAt: {
         title: 'createdAt',
-        editable: false,
         valuePrepareFunction: (date) => {
           var raw = new Date(date);
 
@@ -92,7 +93,7 @@ export class StoreComponent implements OnInit {
 
   constructor(
     private storeService: StoreService,
-    private cartService: CartService
+    private userService: UserService
     // private datePipe: DatePipe
   ) { }
 
@@ -107,28 +108,56 @@ export class StoreComponent implements OnInit {
 
 
   onDeleteConfirm(event) {
-    this.storeService.deleteProduct(event.data).subscribe(
-      response => response.err == null ? event.confirm.resolve() : event.confirm.reject()
-    );
+    this.user = this.userService.getUser();
+    console.log(this.user + "%%%%%%%%%%%%%%%%%%%%%%%%%%");
+    if (this.user && (this.user.userType == 'Admin')) {
+      // alert(`Custom event '${event.action}' fired on row №: ${event.data.id}`);
+      this.storeService.deleteProduct(event.data).subscribe(
+        response => response.err == null ? event.confirm.resolve() : event.confirm.reject()
+      );
+    }
+    else {
+      event.confirm.resolve();
+      this.getProducts();
+      alert('You have to be an Admin to delete products.');
+    }
   }
 
   onCreateConfirm(event) {
-    this.storeService.createProduct(event.newData).subscribe(
-      response => {if(response.err == null){ 
-        event.confirm.resolve(response.data);
-        this.getProducts();
-      }
-      else
-        event.confirm.reject()
+    this.user = this.userService.getUser();
+    if (this.user && (this.user.userType == 'Admin' || this.user.userType == 'Manager')) {
+      // alert(`Custom event '${event.action}' fired on row №: ${event.data.id}`);
+      this.storeService.createProduct(event.newData).subscribe(
+        response => {
+          if (response.err == null) {
+            event.confirm.resolve(response.data);
+            this.getProducts();
+          }
+          else
+            event.confirm.reject()
+        }
+      );
     }
-    );
+    else {
+      event.confirm.resolve();
+      this.getProducts();
+      alert('You have to be an Admin or a Manager to Create products.');
+    }
   }
 
   onSaveConfirm(event) {
-    // alert(`Custom event '${event.action}' fired on row №: ${event.data.id}`);
-    this.storeService.updateProduct(event.newData).subscribe(
-      response => response.err == null ? event.confirm.resolve(event.newData) : event.confirm.reject()
-    );
+    this.user = this.userService.getUser();
+    if (this.user && (this.user.userType == 'Admin' || this.user.userType == 'Manager')) {
+      // alert(`Custom event '${event.action}' fired on row №: ${event.data.id}`);
+      this.storeService.updateProduct(event.newData).subscribe(
+        response => response.err == null ? event.confirm.resolve(event.newData) : event.confirm.reject()
+      );
+    }
+    else {
+      event.confirm.resolve();
+      this.getProducts();
+      alert('You have to be an Admin or a Manager to update products.');
+    }
   }
 
   filterProducts(products: Product[]): Product[] {
