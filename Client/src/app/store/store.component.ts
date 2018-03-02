@@ -53,16 +53,17 @@ export class StoreComponent implements OnInit {
       price: {
         title: 'Price',
         type: 'number',
-        // valuePrepareFunction: (price) => {
-        //   var raw = price;
+        valuePrepareFunction: (price) => {
+          var raw = price;
 
-        //   var formatted = this.currencyPipe.transform(raw, 'USD', 'symbol');
-        //   return formatted;
-        // }
+          var formatted = this.currencyPipe.transform(raw, 'USD', 'symbol');
+          return formatted;
+        }
       },
       sellerName: {
         title: 'Seller',
-        type: 'string'
+        type: 'string',
+        editable: false
       },
       createdAt: {
         title: 'createdAt',
@@ -78,7 +79,7 @@ export class StoreComponent implements OnInit {
         title: 'updatedAt',
         editable: false,
         valuePrepareFunction: (date) => {
-          if(date == "")
+          if (date == "")
             return "";
           var raw = new Date(date);
 
@@ -113,7 +114,13 @@ export class StoreComponent implements OnInit {
 
   onCreateConfirm(event) {
     this.storeService.createProduct(event.newData).subscribe(
-      response => response.err == null ? event.confirm.resolve(response.data) : event.confirm.reject()
+      response => {if(response.err == null){ 
+        event.confirm.resolve(response.data);
+        this.getProducts();
+      }
+      else
+        event.confirm.reject()
+    }
     );
   }
 
@@ -124,11 +131,11 @@ export class StoreComponent implements OnInit {
     );
   }
 
-  filterProducts(products: Product[]): Product[]{
+  filterProducts(products: Product[]): Product[] {
     var returnValue = [];
-    for(var i = 0; i<products.length; i++){
+    for (var i = 0; i < products.length; i++) {
       var product = products[i];
-      if (product.sellerName == 'Wessam'){
+      if (product.sellerName == 'Wessam') {
         returnValue.push(product);
       }
     }
