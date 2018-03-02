@@ -1,3 +1,34 @@
-<p>
-  cart works!
-</p>
+
+<div *ngIf="this.cart.products.length" >
+  <table id="tableCartProducts">
+    <tr>
+      <th id="thCartProductsName">Name</th>
+      <th id="thCartProductsPrice">Price</th>
+      <th id="thCartProductsSellerName">Seller Name</th>
+      <th style="width: auto" (click)="this.cartService.clearCart(this.cart)">Re All</th>
+    </tr>
+    <tr *ngFor="let product of cart.products">
+      <td>{{ product.name | uppercase }}</td>
+      <td>{{ product.price | currency }}</td>
+      <td>{{ product.sellerName }}</td>
+      <td (click)="this.cartService.removeProduct(this.cart, product)">Re</td>
+    </tr>
+  </table>
+  <br />
+  <input id="inputTotalPrice" type="button" value="Total Price: {{ this.cart.totalPrice | currency }}" title="Checkout" (click)="checkout()">
+</div>
+<div id="myModal" class="modal" [style.display]="this.showModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Checkout</h2>
+      <span class="close" (click)="this.closeModal()">&times;</span>
+    </div>
+    <div class="modal-body">
+    <p>Total cost: {{this.cart.totalPrice | currency}}</p>
+      <label for="address">Shipping address: </label>
+      <input [(ngModel)]="this.shippingAddress" placeholder="type the shipping address">
+      <button id="inputTotalPrice" (click)="this.postOrders()">confirm order</button>
+    </div>
+  </div>
+
+</div>
